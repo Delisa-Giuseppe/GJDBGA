@@ -30,6 +30,7 @@ public class PlayerStat : MonoBehaviour
     void Start()
     {
         //Initialize State
+       
         isAttacking = false;
         isArmed = false;
         isAlive = true;
