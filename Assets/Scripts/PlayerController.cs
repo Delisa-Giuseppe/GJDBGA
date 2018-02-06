@@ -3,16 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
-    public Camera camera;
+    public int playerID;
+    public Text labelPlayer;
 
     [SyncVar] public int skinIndex = 0;
     // Use this for initialization
     void Start()
     {
-        Debug.Log(GameObject.FindObjectsOfType<PlayerController>().Length);
+        playerID = GameObject.FindObjectsOfType<PlayerController>().Length;
+        labelPlayer.text = "PLAYER " + playerID;
+        labelPlayer.transform.LookAt(Camera.main.transform.position);
     }
 
     // Update is called once per frame
