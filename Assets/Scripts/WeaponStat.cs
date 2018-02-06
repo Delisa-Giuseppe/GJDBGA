@@ -17,5 +17,9 @@ public class WeaponStat : MonoBehaviour {
     void Update () {
 		
 	}
-  
+    private void OnTriggerEnter(Collider other)
+    { 
+       //if(transform.parent.gameObject.GetComponent<PlayerStat>().isArmed)
+        //Debug.Log(other.name+" "+this.gameObject.name);
+    }
 }
