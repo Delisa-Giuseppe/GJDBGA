@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PlayerController : NetworkBehaviour
 {
     [SyncVar] public int playerID;
+    [SyncVar] public bool isDefending;
     public Text labelPlayer;
     public GameObject playerPoint;
 
@@ -18,8 +19,7 @@ public class PlayerController : NetworkBehaviour
     private GameManager gm;
     private Animator anim;
     private bool start;
-    [SyncVar] private bool isDefending;
-
+    
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -70,8 +70,8 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer)
             return;
 
-        ps.OnDefence();
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+        ps.OnDefence();
 
         if (!start)
         {
@@ -150,14 +150,18 @@ public class PlayerController : NetworkBehaviour
                 IsDefending = false;
             }
 
-            ps.OnDefence();
             labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+            ps.OnDefence();
 
             if (!start)
             {
                 anim.SetTrigger("StartGame");
                 start = true;
             }
+        }
+        else
+        {
+            return;
         }
 
         CmdUpdate();
