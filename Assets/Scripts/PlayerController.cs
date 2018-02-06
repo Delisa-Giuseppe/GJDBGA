@@ -12,6 +12,8 @@ public class PlayerController : NetworkBehaviour
 
     private PlayerStat ps;
     private LineRenderer lr;
+    private Vector3 cursorPosition;
+    private Vector3 playerDirection;
 
     [SyncVar] public int skinIndex = 0;
 
@@ -84,14 +86,14 @@ public class PlayerController : NetworkBehaviour
 
             if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Terrain")
             {
-                Vector3 objectHit = hit.point;
-                objectHit.y += GetComponent<CapsuleCollider>().height / 2;
-                Vector3 playerDirection = (objectHit - transform.position).normalized;
+                cursorPosition = hit.point;
+                cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
+                playerDirection = (cursorPosition - transform.position).normalized;
                 GetComponent<Rigidbody>().AddForce(playerDirection * (0.1f + (ps.PlayerSpeed * 0.03f)), ForceMode.VelocityChange);
-                transform.DOLookAt(objectHit, 0.5f);
+                transform.DOLookAt(cursorPosition, 0.5f);
 
                 lr.SetPosition(0, transform.position);
-                lr.SetPosition(1, objectHit);
+                lr.SetPosition(1, cursorPosition);
             }
         }
     }
