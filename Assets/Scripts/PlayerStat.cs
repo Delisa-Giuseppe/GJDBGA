@@ -91,10 +91,11 @@ public class PlayerStat : MonoBehaviour
                 }
                 if (isArmed && IsAttacking)
                 {
-                    if (other.transform.parent != transform)
+                    if (pc.playerID!= other.gameObject.GetComponent<PlayerController>().playerID)
                     {
                         if (other.gameObject.GetComponent<PlayerStat>() != null)
                         {
+                            Debug.Log("Il guerriero "+this.pc.playerID + " Ha colpito il guerriero" +other.gameObject.GetComponent<PlayerController>().playerID);
                             other.GetComponent<PlayerStat>().Health -= other.GetComponent<PlayerStat>().DamageOutput;
                         }
                     }
