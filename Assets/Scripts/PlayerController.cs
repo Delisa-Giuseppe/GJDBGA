@@ -12,7 +12,7 @@ public class PlayerController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        Debug.Log(GameObject.FindObjectsOfType<PlayerController>().Length);
     }
 
     // Update is called once per frame
