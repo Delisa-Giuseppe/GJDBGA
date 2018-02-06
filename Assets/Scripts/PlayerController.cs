@@ -15,11 +15,13 @@ public class PlayerController : NetworkBehaviour
     private Vector3 cursorPosition;
     private Vector3 playerDirection;
     private GameManager gm;
+    private Animator anim;
 
     [SyncVar] public int skinIndex = 0;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         ps = GetComponent<PlayerStat>();
         lr = GetComponent<LineRenderer>();
         gm = FindObjectOfType<GameManager>();
@@ -94,6 +96,8 @@ public class PlayerController : NetworkBehaviour
                 lr.SetPosition(0, transform.position);
                 lr.SetPosition(1, cursorPosition);
             }
+
+            anim.SetTrigger("StartGame");
         }
     }
 }
