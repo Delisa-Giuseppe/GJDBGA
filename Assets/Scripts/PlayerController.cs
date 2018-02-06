@@ -9,12 +9,16 @@ public class PlayerController : NetworkBehaviour
 {
     public int playerID;
     public Text labelPlayer;
+
     private PlayerStat ps;
+    private LineRenderer lr;
 
     [SyncVar] public int skinIndex = 0;
-    // Use this for initialization
+
     void Start()
     {
+        lr = GetComponent<LineRenderer>();
+
         if(isLocalPlayer)
         {
             playerID = GameObject.FindObjectsOfType<PlayerController>().Length;
@@ -24,7 +28,6 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         PlayerMovement();
@@ -85,8 +88,10 @@ public class PlayerController : NetworkBehaviour
                 objectHit.y += GetComponent<CapsuleCollider>().height / 2;
                 Vector3 playerDirection = (objectHit - transform.position).normalized;
                 GetComponent<Rigidbody>().AddForce(playerDirection * (0.1f + (ps.PlayerSpeed * 0.03f)), ForceMode.VelocityChange);
-                Debug.Log((0.1f + (ps.PlayerSpeed * 0.05f)));
                 transform.DOLookAt(objectHit, 0.5f);
+
+                lr.SetPosition(0, transform.position);
+                lr.SetPosition(1, objectHit);
             }
         }
     }
