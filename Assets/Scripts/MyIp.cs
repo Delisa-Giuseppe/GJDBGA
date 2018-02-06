@@ -16,7 +16,8 @@ public class MyIp : NetworkBehaviour {
 	void Start () {
       //  IPText = transform.Find("Text").GetComponent<Text>();
         myIP = "";
-        IPText.text = myIP;
+        if(IPText)
+            IPText.text = myIP;
 
     }
 	
@@ -25,7 +26,7 @@ public class MyIp : NetworkBehaviour {
 
 
         myIP = LocalIPAddress();
-        if (NetworkManager.singleton.networkAddress == "localhost")
+        if (NetworkManager.singleton.networkAddress == "localhost" && IPText)
         {
             IPText.gameObject.SetActive(true);
             IPText.text ="You are the host, this is your IP "+ System.Environment.NewLine + LocalIPAddress();          

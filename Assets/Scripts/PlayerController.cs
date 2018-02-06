@@ -7,27 +7,23 @@ using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
-    public int playerID;
+    [SyncVar] public int playerID;
     public Text labelPlayer;
 
     private PlayerStat ps;
     private LineRenderer lr;
     private Vector3 cursorPosition;
     private Vector3 playerDirection;
+    private GameManager gm;
 
     [SyncVar] public int skinIndex = 0;
 
     void Start()
     {
+        ps = GetComponent<PlayerStat>();
         lr = GetComponent<LineRenderer>();
-
-        if(isLocalPlayer)
-        {
-            playerID = GameObject.FindObjectsOfType<PlayerController>().Length;
-            labelPlayer.text = "PLAYER " + playerID;
-            labelPlayer.transform.LookAt(Camera.main.transform.position);
-            ps = GetComponent<PlayerStat>();
-        }
+        gm = FindObjectOfType<GameManager>();
+        gm.PlayerList.Add(this);
     }
 
     void Update()
