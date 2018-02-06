@@ -119,9 +119,11 @@ public class PlayerController : NetworkBehaviour
         }
 
         if(!start)
+        {
             anim.SetTrigger("StartGame");
+            start = true;
+        }   
 
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
-        start = true;
     }
 }
