@@ -22,6 +22,10 @@ public class PlayerStat : MonoBehaviour
     //Network State
     public bool isReady;
 
+    public MeshRenderer ShieldRenderer;
+
+    public BoxCollider ShieldCollider;
+
     // Use this for initialization
     void Start()
     {
@@ -30,7 +34,7 @@ public class PlayerStat : MonoBehaviour
         isArmed = false;
         isAlive = true;
         isDefending = false;
-
+        OnDefence();
     }
 
     // Update is called once per frame
@@ -43,7 +47,7 @@ public class PlayerStat : MonoBehaviour
             isAlive = false;
         }
         playerState();
-        if (Input.GetMouseButtonDown(0))//Tast Destro
+        if (Input.GetMouseButtonDown(0)&&!isDefending)//Tast Destro
         {
             isAttacking = true;
             Debug.Log("Attacco");
@@ -52,9 +56,16 @@ public class PlayerStat : MonoBehaviour
         {
             isAttacking = false;
         }
-        if (Input.GetMouseButtonDown(1))//Tasto Sinistro
-        {
-            //  Debug.Log("Difeso");
+        if (Input.GetMouseButtonDown(1) && !isAttacking)//Tasto Sinistro
+        {            
+            isDefending = true;
+            OnDefence();
+           Debug.Log("Difeso");
+        }
+        if (Input.GetMouseButtonUp(1))//Tasto Sinistro
+        {      
+            isDefending = false;
+            OnDefence();
         }
     }
 
@@ -67,25 +78,44 @@ public class PlayerStat : MonoBehaviour
 
     }
 
+    private void OnDefence()
+    {
+        if (isDefending)
+        {
+            ShieldCollider.enabled = true;
+            ShieldRenderer.enabled = true;
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
+        else
+        {
+            ShieldCollider.enabled = false;
+            ShieldRenderer.enabled = false;
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Terrain")
         {
-            if (other.tag == "Weapon" && !isArmed)
+            if(!isDefending)
             {
-                DamageOutput = other.GetComponent<WeaponStat>().DamageOutput;
-                Defence = other.GetComponent<WeaponStat>().Defence;
-                PlayerSpeed = other.GetComponent<WeaponStat>().PlayerSpeed;
-                other.transform.parent = this.gameObject.transform;
-                isArmed = true;
-            }
-            if (isArmed && isAttacking)
-            {
-                if (other.transform.parent != transform)
+                if (other.tag == "Weapon" && !isArmed)
                 {
-                    if (other.gameObject.GetComponent<PlayerStat>() != null)
+                    DamageOutput = other.GetComponent<WeaponStat>().DamageOutput;
+                    Defence = other.GetComponent<WeaponStat>().Defence;
+                    PlayerSpeed = other.GetComponent<WeaponStat>().PlayerSpeed;
+                    other.transform.parent = this.gameObject.transform;
+                    isArmed = true;
+                }
+                if (isArmed && isAttacking)
+                {
+                    if (other.transform.parent != transform)
                     {
-                        other.GetComponent<PlayerStat>().Health -= other.GetComponent<PlayerStat>().DamageOutput;
+                        if (other.gameObject.GetComponent<PlayerStat>() != null)
+                        {
+                            other.GetComponent<PlayerStat>().Health -= other.GetComponent<PlayerStat>().DamageOutput;
+                        }
                     }
                 }
             }
