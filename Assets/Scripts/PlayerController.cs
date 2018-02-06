@@ -18,31 +18,17 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLocalPlayer)
+        PlayerMovement();
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            RaycastHit hit;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Terrain")
-            {
-                Vector3 objectHit = hit.point;
-                transform.DOMove(objectHit, 5);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 500);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                CmdChangeSkin(skinIndex, gameObject);
-            }
-
-
+            GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 500);
         }
 
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            CmdChangeSkin(skinIndex, gameObject);
+        }
     }
 
     [Command]
@@ -74,6 +60,22 @@ public class PlayerController : NetworkBehaviour
             player.transform.GetChild(0).gameObject.SetActive(false);
             player.transform.GetChild(1).gameObject.SetActive(true);
         }
+    }
 
+    void PlayerMovement ()
+    {
+        if (isLocalPlayer)
+        {
+            RaycastHit hit;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Terrain")
+            {
+                Vector3 objectHit = hit.point;
+                transform.DOMove(objectHit, 5);
+                transform.DOLookAt(objectHit, 0.5f);
+            }
+        }
     }
 }
