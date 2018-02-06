@@ -6,9 +6,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public int maxPlayer = 4;
+    public static bool startGame;
     public List<GameObject> spawnPoints;
     private List<PlayerController> playerList = new List<PlayerController>();
     private bool isInitialized;
+
+    private void Start()
+    {
+        startGame = false;
+    }
 
     public List<PlayerController> PlayerList
     {
@@ -23,16 +29,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Update () {
 		if(!isInitialized && playerList.Count == maxPlayer)
         {
             InitializePlayer();
+            startGame = true;
         }
 	}
 

@@ -173,7 +173,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4149660168420216, guid: a1b0938f8e5790542b549171d8007558, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114608002507123062, guid: a1b0938f8e5790542b549171d8007558,
         type: 2}
@@ -263,7 +263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685266355
 GameObject:
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7b8cf7bf636c24f874c98834f5c82c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayer: 2
+  maxPlayer: 1
   spawnPoints:
   - {fileID: 532106805}
   - {fileID: 747942542}
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1336787611531104, guid: ed31b2da64307584cb8e38edfc90f359,
+  m_PlayerPrefab: {fileID: 1230423389573702, guid: fa5a28c1da6cc8545bd59dbb2c0cd19a,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1595641123}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08713a8652c0f274aae326fae2911fdc, type: 3}
   m_Name: 

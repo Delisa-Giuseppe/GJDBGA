@@ -28,7 +28,10 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
-        PlayerMovement();
+        if(GameManager.startGame)
+        {
+            PlayerMovement();
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
