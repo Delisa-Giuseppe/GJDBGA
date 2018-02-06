@@ -417,10 +417,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!65 &65417796636658736
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -565,9 +565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 9
-  DamageOutput: 0
-  Defence: 0
-  PlayerSpeed: 0
+  DamageOutput: 1
+  Defence: 1
+  PlayerSpeed: 1
   isReady: 0
 --- !u!114 &114607929687020602
 MonoBehaviour:

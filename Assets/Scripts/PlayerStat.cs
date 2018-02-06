@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class PlayerStat : MonoBehaviour {
 
     //Stat
     public int Health;
     public int DamageOutput;
     public int Defence;
-    public int PlayerSpeed;
+    public float PlayerSpeed;
 
     //Combat State
     private bool isAttacking;
@@ -63,9 +63,9 @@ public class Player : MonoBehaviour {
         Debug.Log(other.gameObject.name);
         if (other.tag == "Weapon")
         {
-            DamageOutput = other.GetComponent<Weapon>().DamageOutput;
-            Defence = other.GetComponent<Weapon>().Defence;
-            PlayerSpeed = other.GetComponent<Weapon>().PlayerSpeed;
+            DamageOutput = other.GetComponent<WeaponStat>().DamageOutput;
+            Defence = other.GetComponent<WeaponStat>().Defence;
+            PlayerSpeed = other.GetComponent<WeaponStat>().PlayerSpeed;
             Destroy(other.gameObject);
         }
     }

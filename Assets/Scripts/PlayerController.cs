@@ -9,6 +9,7 @@ public class PlayerController : NetworkBehaviour
 {
     public int playerID;
     public Text labelPlayer;
+    private PlayerStat ps;
 
     [SyncVar] public int skinIndex = 0;
     // Use this for initialization
@@ -19,6 +20,7 @@ public class PlayerController : NetworkBehaviour
             playerID = GameObject.FindObjectsOfType<PlayerController>().Length;
             labelPlayer.text = "PLAYER " + playerID;
             labelPlayer.transform.LookAt(Camera.main.transform.position);
+            ps = GetComponent<PlayerStat>();
         }
     }
 
@@ -80,7 +82,10 @@ public class PlayerController : NetworkBehaviour
             if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Terrain")
             {
                 Vector3 objectHit = hit.point;
-                transform.DOMove(objectHit, 5);
+                objectHit.y += GetComponent<CapsuleCollider>().height / 2;
+                Vector3 playerDirection = (objectHit - transform.position).normalized;
+                GetComponent<Rigidbody>().AddForce(playerDirection * (0.1f + (ps.PlayerSpeed * 0.03f)), ForceMode.VelocityChange);
+                Debug.Log((0.1f + (ps.PlayerSpeed * 0.05f)));
                 transform.DOLookAt(objectHit, 0.5f);
             }
         }

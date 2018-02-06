@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour { 
+public class WeaponStat : MonoBehaviour { 
 
     //Stat
     public int DamageOutput;
     public int Defence;
-    public int PlayerSpeed;
-    // Use this for initialization
+    public float PlayerSpeed;
+
     void Start () {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	
+    void Update () {
 		
 	}
   
