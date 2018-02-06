@@ -14,10 +14,10 @@ public class PlayerStat : MonoBehaviour
 
     //Combat State
     [SerializeField] private bool isAttacking;
-    [SerializeField] private bool isDefending;
 
     private bool isAlive;
     public bool isArmed;
+    private PlayerController pc;
 
     //Network State
     public bool isReady;
@@ -30,11 +30,10 @@ public class PlayerStat : MonoBehaviour
     void Start()
     {
         //Initialize State
-       
+        pc = GetComponent<PlayerController>();
         IsAttacking = false;
         isArmed = false;
         isAlive = true;
-        IsDefending = false;
         OnDefence();
     }
 
@@ -62,7 +61,7 @@ public class PlayerStat : MonoBehaviour
 
     public void OnDefence()
     {
-        if (IsDefending)
+        if (pc.IsDefending)
         {
             ShieldCollider.enabled = true;
             ShieldRenderer.enabled = true;
@@ -80,7 +79,7 @@ public class PlayerStat : MonoBehaviour
     {
         if (other.tag != "Terrain")
         {
-            if(!IsDefending)
+            if(!pc.IsDefending)
             {
                 if (other.tag == "Weapon" && !isArmed)
                 {
@@ -101,19 +100,6 @@ public class PlayerStat : MonoBehaviour
                     }
                 }
             }
-        }
-    }
-
-    public bool IsDefending
-    {
-        get
-        {
-            return isDefending;
-        }
-
-        set
-        {
-            isDefending = value;
         }
     }
 

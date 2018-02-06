@@ -18,6 +18,7 @@ public class PlayerController : NetworkBehaviour
     private GameManager gm;
     private Animator anim;
     private bool start;
+    [SyncVar] private bool isDefending;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class PlayerController : NetworkBehaviour
         gm = FindObjectOfType<GameManager>();
         gm.PlayerList.Add(this);
         start = false;
+        IsDefending = false;
 
         if(isLocalPlayer)
             PlayerPoint();
@@ -129,7 +131,7 @@ public class PlayerController : NetworkBehaviour
                 lr.SetPosition(1, cursorPosition);
             }
 
-            if (Input.GetMouseButtonDown(0) && !ps.IsDefending)//Tast Destro
+            if (Input.GetMouseButtonDown(0) && !IsDefending)//Tast Destro
             {
                 ps.IsAttacking = true;
                 Debug.Log("Attacco");
@@ -140,12 +142,12 @@ public class PlayerController : NetworkBehaviour
             }
             if (Input.GetMouseButtonDown(1) && !ps.IsAttacking)//Tasto Sinistro
             {
-                ps.IsDefending = true;
+                IsDefending = true;
                 Debug.Log("Difeso");
             }
             if (Input.GetMouseButtonUp(1))//Tasto Sinistro
             {
-                ps.IsDefending = false;
+                IsDefending = false;
             }
 
             ps.OnDefence();
@@ -159,5 +161,18 @@ public class PlayerController : NetworkBehaviour
         }
 
         CmdUpdate();
+    }
+
+    public bool IsDefending
+    {
+        get
+        {
+            return isDefending;
+        }
+
+        set
+        {
+            isDefending = value;
+        }
     }
 }
