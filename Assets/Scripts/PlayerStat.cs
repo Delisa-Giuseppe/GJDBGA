@@ -31,10 +31,10 @@ public class PlayerStat : MonoBehaviour
     {
         //Initialize State
        
-        isAttacking = false;
+        IsAttacking = false;
         isArmed = false;
         isAlive = true;
-        isDefending = false;
+        IsDefending = false;
         OnDefence();
     }
 
@@ -48,26 +48,7 @@ public class PlayerStat : MonoBehaviour
             isAlive = false;
         }
         playerState();
-        if (Input.GetMouseButtonDown(0)&&!isDefending)//Tast Destro
-        {
-            isAttacking = true;
-            Debug.Log("Attacco");
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            isAttacking = false;
-        }
-        if (Input.GetMouseButtonDown(1) && !isAttacking)//Tasto Sinistro
-        {            
-            isDefending = true;
-            OnDefence();
-           Debug.Log("Difeso");
-        }
-        if (Input.GetMouseButtonUp(1))//Tasto Sinistro
-        {      
-            isDefending = false;
-            OnDefence();
-        }
+        
     }
 
     private void playerState()
@@ -79,9 +60,9 @@ public class PlayerStat : MonoBehaviour
 
     }
 
-    private void OnDefence()
+    public void OnDefence()
     {
-        if (isDefending)
+        if (IsDefending)
         {
             ShieldCollider.enabled = true;
             ShieldRenderer.enabled = true;
@@ -99,7 +80,7 @@ public class PlayerStat : MonoBehaviour
     {
         if (other.tag != "Terrain")
         {
-            if(!isDefending)
+            if(!IsDefending)
             {
                 if (other.tag == "Weapon" && !isArmed)
                 {
@@ -109,7 +90,7 @@ public class PlayerStat : MonoBehaviour
                     other.transform.parent = this.gameObject.transform;
                     isArmed = true;
                 }
-                if (isArmed && isAttacking)
+                if (isArmed && IsAttacking)
                 {
                     if (other.transform.parent != transform)
                     {
@@ -120,6 +101,32 @@ public class PlayerStat : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public bool IsDefending
+    {
+        get
+        {
+            return isDefending;
+        }
+
+        set
+        {
+            isDefending = value;
+        }
+    }
+
+    public bool IsAttacking
+    {
+        get
+        {
+            return isAttacking;
+        }
+
+        set
+        {
+            isAttacking = value;
         }
     }
 }

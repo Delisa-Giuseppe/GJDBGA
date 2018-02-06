@@ -56,14 +56,26 @@ public class PlayerController : NetworkBehaviour
         playerPoint.SetActive(true);
     }
 
+    [Command]
+    void CmdUpdate()
+    {
+        RpcUpdateClient();
+    }
+
     [ClientRpc]
     void RpcUpdateClient()
     {
         if (isLocalPlayer)
             return;
 
-        anim.SetTrigger("StartGame");
+        ps.OnDefence();
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+
+        if (!start)
+        {
+            anim.SetTrigger("StartGame");
+            start = true;
+        }
     }
 
     //[Command]
@@ -116,14 +128,36 @@ public class PlayerController : NetworkBehaviour
                 lr.SetPosition(0, transform.position);
                 lr.SetPosition(1, cursorPosition);
             }
+
+            if (Input.GetMouseButtonDown(0) && !ps.IsDefending)//Tast Destro
+            {
+                ps.IsAttacking = true;
+                Debug.Log("Attacco");
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                ps.IsAttacking = false;
+            }
+            if (Input.GetMouseButtonDown(1) && !ps.IsAttacking)//Tasto Sinistro
+            {
+                ps.IsDefending = true;
+                Debug.Log("Difeso");
+            }
+            if (Input.GetMouseButtonUp(1))//Tasto Sinistro
+            {
+                ps.IsDefending = false;
+            }
+
+            ps.OnDefence();
+            labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+
+            if (!start)
+            {
+                anim.SetTrigger("StartGame");
+                start = true;
+            }
         }
 
-        if(!start)
-        {
-            anim.SetTrigger("StartGame");
-            start = true;
-        }   
-
-        labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+        CmdUpdate();
     }
 }
