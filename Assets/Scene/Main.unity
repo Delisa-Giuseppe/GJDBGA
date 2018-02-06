@@ -147,6 +147,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114608002507123062, guid: a1b0938f8e5790542b549171d8007558,
+        type: 2}
+      propertyPath: PlayerSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180840276273298, guid: a1b0938f8e5790542b549171d8007558,
+        type: 2}
+      propertyPath: PlayerSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114029143672467658, guid: a1b0938f8e5790542b549171d8007558,
+        type: 2}
+      propertyPath: PlayerSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564725320403978, guid: a1b0938f8e5790542b549171d8007558,
+        type: 2}
+      propertyPath: PlayerSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114440204683624780, guid: a1b0938f8e5790542b549171d8007558,
+        type: 2}
+      propertyPath: PlayerSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1b0938f8e5790542b549171d8007558, type: 2}
   m_IsPrefabParent: 0
@@ -447,7 +472,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1595641123}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08713a8652c0f274aae326fae2911fdc, type: 3}
   m_Name: 
