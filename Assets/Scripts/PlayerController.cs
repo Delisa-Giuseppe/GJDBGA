@@ -14,9 +14,12 @@ public class PlayerController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        playerID = GameObject.FindObjectsOfType<PlayerController>().Length;
-        labelPlayer.text = "PLAYER " + playerID;
-        labelPlayer.transform.LookAt(Camera.main.transform.position);
+        if(isLocalPlayer)
+        {
+            playerID = GameObject.FindObjectsOfType<PlayerController>().Length;
+            labelPlayer.text = "PLAYER " + playerID;
+            labelPlayer.transform.LookAt(Camera.main.transform.position);
+        }
     }
 
     // Update is called once per frame
