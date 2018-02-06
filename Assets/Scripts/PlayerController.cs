@@ -9,6 +9,7 @@ public class PlayerController : NetworkBehaviour
 {
     [SyncVar] public int playerID;
     public Text labelPlayer;
+    public GameObject playerPoint;
 
     private PlayerStat ps;
     private LineRenderer lr;
@@ -16,8 +17,7 @@ public class PlayerController : NetworkBehaviour
     private Vector3 playerDirection;
     private GameManager gm;
     private Animator anim;
-
-    [SyncVar] public int skinIndex = 0;
+    private bool start;
 
     void Start()
     {
@@ -26,6 +26,10 @@ public class PlayerController : NetworkBehaviour
         lr = GetComponent<LineRenderer>();
         gm = FindObjectOfType<GameManager>();
         gm.PlayerList.Add(this);
+        start = false;
+
+        if(isLocalPlayer)
+            PlayerPoint();
     }
 
     void Update()
@@ -40,42 +44,58 @@ public class PlayerController : NetworkBehaviour
             GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 500);
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            CmdChangeSkin(skinIndex, gameObject);
-        }
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    CmdChangeSkin(skinIndex, gameObject);
+        //}
     }
 
-    [Command]
-    void CmdChangeSkin(int skinIndex, GameObject player)
+    [Client]
+    void PlayerPoint()
     {
-        if (skinIndex == 0)
-        {
-            skinIndex = 1;
-        }
-        else if (skinIndex == 1)
-        {
-            skinIndex = 0;
-        }
-
-        RpcChangeSkin(skinIndex, player);
-
+        playerPoint.SetActive(true);
     }
 
     [ClientRpc]
-    void RpcChangeSkin(int skinIndex, GameObject player)
+    void RpcUpdateClient()
     {
-        if (skinIndex == 0)
-        {
-            player.transform.GetChild(1).gameObject.SetActive(false);
-            player.transform.GetChild(0).gameObject.SetActive(true);
-        }
-        else if (skinIndex == 1)
-        {
-            player.transform.GetChild(0).gameObject.SetActive(false);
-            player.transform.GetChild(1).gameObject.SetActive(true);
-        }
+        if (isLocalPlayer)
+            return;
+
+        anim.SetTrigger("StartGame");
+        labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
+
+    //[Command]
+    //void CmdChangeSkin(int skinIndex, GameObject player)
+    //{
+    //    if (skinIndex == 0)
+    //    {
+    //        skinIndex = 1;
+    //    }
+    //    else if (skinIndex == 1)
+    //    {
+    //        skinIndex = 0;
+    //    }
+
+    //    RpcChangeSkin(skinIndex, player);
+
+    //}
+
+    //[ClientRpc]
+    //void RpcChangeSkin(int skinIndex, GameObject player)
+    //{
+    //    if (skinIndex == 0)
+    //    {
+    //        player.transform.GetChild(1).gameObject.SetActive(false);
+    //        player.transform.GetChild(0).gameObject.SetActive(true);
+    //    }
+    //    else if (skinIndex == 1)
+    //    {
+    //        player.transform.GetChild(0).gameObject.SetActive(false);
+    //        player.transform.GetChild(1).gameObject.SetActive(true);
+    //    }
+    //}
 
     void PlayerMovement ()
     {
@@ -96,9 +116,12 @@ public class PlayerController : NetworkBehaviour
                 lr.SetPosition(0, transform.position);
                 lr.SetPosition(1, cursorPosition);
             }
-
-            anim.SetTrigger("StartGame");
-            labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
         }
+
+        if(!start)
+            anim.SetTrigger("StartGame");
+
+        labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+        start = true;
     }
 }

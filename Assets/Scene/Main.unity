@@ -175,31 +175,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114608002507123062, guid: a1b0938f8e5790542b549171d8007558,
-        type: 2}
-      propertyPath: PlayerSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180840276273298, guid: a1b0938f8e5790542b549171d8007558,
-        type: 2}
-      propertyPath: PlayerSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114029143672467658, guid: a1b0938f8e5790542b549171d8007558,
-        type: 2}
-      propertyPath: PlayerSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114564725320403978, guid: a1b0938f8e5790542b549171d8007558,
-        type: 2}
-      propertyPath: PlayerSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114440204683624780, guid: a1b0938f8e5790542b549171d8007558,
-        type: 2}
-      propertyPath: PlayerSpeed
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1b0938f8e5790542b549171d8007558, type: 2}
   m_IsPrefabParent: 0
@@ -431,6 +406,11 @@ Prefab:
       propertyPath: spawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1897328642}
+    - target: {fileID: 114295362885681882, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: maxPlayer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1214e15fa58c534aab5768adf7911ea, type: 2}
   m_IsPrefabParent: 0
