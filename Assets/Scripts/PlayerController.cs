@@ -1,16 +1,18 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour
 {
+    public Camera camera;
 
     [SyncVar] public int skinIndex = 0;
     // Use this for initialization
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -18,11 +20,15 @@ public class PlayerController : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            float x = Input.GetAxis("Horizontal") * Time.deltaTime * 200.0f;
-            float z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
+            RaycastHit hit;
 
-            transform.Rotate(0, x, 0);
-            transform.Translate(0, 0, z);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Terrain")
+            {
+                Vector3 objectHit = hit.point;
+                transform.DOMove(objectHit, 5);
+            }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
