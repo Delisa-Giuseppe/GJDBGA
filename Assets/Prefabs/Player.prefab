@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 136516185428370856}
   - component: {fileID: 23349133964784890}
   - component: {fileID: 114303057627040916}
+  - component: {fileID: 114431734134156666}
   - component: {fileID: 114391998379346654}
   - component: {fileID: 95135217978146242}
   - component: {fileID: 114776703965606788}
@@ -172,7 +173,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1336787611531104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0528733, y: -2.8151266e-17, z: 1.2678202}
+  m_LocalPosition: {x: -13.696339, y: -5.01, z: -7.323445}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4837439624139300}
@@ -536,6 +537,22 @@ MonoBehaviour:
   playerID: 0
   labelPlayer: {fileID: 114125104527205470}
   skinIndex: 0
+--- !u!114 &114431734134156666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1336787611531104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a836e90f9e8b6bb4488c27f028513cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 9
+  DamageOutput: 0
+  Defence: 0
+  PlayerSpeed: 0
+  isReady: 0
 --- !u!114 &114607929687020602
 MonoBehaviour:
   m_ObjectHideFlags: 1
