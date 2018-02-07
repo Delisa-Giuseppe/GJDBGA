@@ -892,6 +892,7 @@ GameObject:
   - component: {fileID: 33299298515151434}
   - component: {fileID: 65263067793383364}
   - component: {fileID: 23920233878123186}
+  - component: {fileID: 114788832911178110}
   m_Layer: 8
   m_Name: Shiled
   m_TagString: Untagged
@@ -1168,7 +1169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230423389573702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4506447, y: -3.2722304, z: -10.690452}
+  m_LocalPosition: {x: -2.9414146, y: -3.2722304, z: -6.3867674}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4725627239472218}
@@ -2554,6 +2555,38 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372533475712988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 250
+    i1: 90
+    i2: 40
+    i3: 193
+    i4: 218
+    i5: 108
+    i6: 200
+    i7: 84
+    i8: 91
+    i9: 213
+    i10: 157
+    i11: 187
+    i12: 44
+    i13: 12
+    i14: 209
+    i15: 154
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114788832911178110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820607700311378}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}

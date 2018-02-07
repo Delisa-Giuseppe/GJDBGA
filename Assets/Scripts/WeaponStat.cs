@@ -40,6 +40,7 @@ public class WeaponStat : MonoBehaviour {
         else if (pc && pc.playerID != player.playerID && !pc.isDefending)
         {
             Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
+            pc.anim.SetTrigger("TakeDamage");
             pc.Health -= player.DamageOutput;
             pc.labelPlayer.text = " HEALTH : " + pc.Health;
         }

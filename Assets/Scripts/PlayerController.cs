@@ -32,6 +32,7 @@ public class PlayerController : NetworkBehaviour
     private Vector3 playerDirection;
     private GameManager gm;
     private bool start;
+    private bool isDead;
     
     void Start()
     {
@@ -43,21 +44,25 @@ public class PlayerController : NetworkBehaviour
         IsDefending = false;
 
         if(isLocalPlayer)
-            PlayerPoint();
+            PlayerPointEnable();
     }
 
     void Update()
     {
-        if(GameManager.startGame)
+        if(!isDead)
         {
-            PlayerMovement();
-        }
+            if (GameManager.startGame)
+            {
+                PlayerMovement();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 500);
+            if (Health <= 0)
+            {
+                isDead = true;
+                anim.SetTrigger("Death");
+                PlayerPointDisable();
+            }
         }
-
         //if (Input.GetKeyDown(KeyCode.Return))
         //{
         //    CmdChangeSkin(skinIndex, gameObject);
@@ -65,9 +70,15 @@ public class PlayerController : NetworkBehaviour
     }
 
     [Client]
-    void PlayerPoint()
+    void PlayerPointEnable()
     {
         playerPoint.SetActive(true);
+    }
+
+    [Client]
+    void PlayerPointDisable()
+    {
+        playerPoint.SetActive(false);
     }
 
     [Command]
@@ -83,7 +94,6 @@ public class PlayerController : NetworkBehaviour
             return;
 
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
-        OnDefence();
 
         if (!start)
         {
@@ -91,8 +101,9 @@ public class PlayerController : NetworkBehaviour
             start = true;
         }
     }
-
-    public void OnDefence()
+    
+    [Command]
+    public void CmdDefence()
     {
         if (IsDefending)
         {
@@ -102,7 +113,6 @@ public class PlayerController : NetworkBehaviour
         else
         {
             shield.SetActive(false);
-            //this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 
@@ -182,7 +192,7 @@ public class PlayerController : NetworkBehaviour
             }
 
             labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
-            OnDefence();
+            CmdDefence();
 
             if (!start)
             {
@@ -198,7 +208,7 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
-        OnDefence();
+        CmdDefence();
         CmdUpdate();
     }
 
