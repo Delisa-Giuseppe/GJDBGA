@@ -107,72 +107,36 @@ public class PlayerController : NetworkBehaviour
         playerPoint.SetActive(false);
     }
 
-    [Command]
-    public void CmdAnimate(string name, bool value, bool trigger)
-    {
-        RpcAnimate(name, value, trigger);
-    }
-
-    [ClientRpc]
-    void RpcAnimate(string name, bool value, bool trigger)
-    {
-        if(anim)
-        {
-            if (!trigger)
-                anim.SetBool(name, value);
-            else
-                anim.SetTrigger(name);
-        }
-    }
-
-    [Command]
-    public void CmdUpdateServer(bool fight, bool defence, int health)
-    {
-        RpcUpdateServer(fight, defence, health);
-    }
-
-    [ClientRpc]
-    private void RpcUpdateServer(bool fight, bool defence, int health)
-    {
-        isAttacking = fight;
-        isDefending = defence;
-        Health = health;
-    }
-
-    //[ClientRpc]
-    //void RpcDefence()
-    //{
-    //    OnDefence();
-    //}
     //[Command]
-    //void CmdChangeSkin(int skinIndex, GameObject player)
+    //public void CmdAnimate(string name, bool value, bool trigger)
     //{
-    //    if (skinIndex == 0)
-    //    {
-    //        skinIndex = 1;
-    //    }
-    //    else if (skinIndex == 1)
-    //    {
-    //        skinIndex = 0;
-    //    }
-
-    //    RpcChangeSkin(skinIndex, player);
-
+    //    RpcAnimate(name, value, trigger);
     //}
 
     //[ClientRpc]
-    //void RpcChangeSkin(int skinIndex, GameObject player)
+    //void RpcAnimate(string name, bool value, bool trigger)
     //{
-    //    if (skinIndex == 0)
+    //    if(anim)
     //    {
-    //        player.transform.GetChild(1).gameObject.SetActive(false);
-    //        player.transform.GetChild(0).gameObject.SetActive(true);
+    //        if (!trigger)
+    //            anim.SetBool(name, value);
+    //        else
+    //            anim.SetTrigger(name);
     //    }
-    //    else if (skinIndex == 1)
-    //    {
-    //        player.transform.GetChild(0).gameObject.SetActive(false);
-    //        player.transform.GetChild(1).gameObject.SetActive(true);
-    //    }
+    //}
+
+    //[Command]
+    //public void CmdUpdateServer(bool fight, bool defence, int health)
+    //{
+    //    RpcUpdateServer(fight, defence, health);
+    //}
+
+    //[ClientRpc]
+    //private void RpcUpdateServer(bool fight, bool defence, int health)
+    //{
+    //    isAttacking = fight;
+    //    isDefending = defence;
+    //    Health = health;
     //}
 
     void PlayerMovement ()
@@ -219,15 +183,15 @@ public class PlayerController : NetworkBehaviour
             }
 
             anim.SetTrigger("StartGame");
-            CmdAnimate("StartGame", false, true);
+            //CmdAnimate("StartGame", false, true);
 
             anim.SetBool("IsAttacking", isAttacking);
             anim.SetBool("IsDefending", isDefending);
 
-            CmdAnimate("IsAttacking", isAttacking, false);
-            CmdAnimate("IsDefending", isDefending, false);
+            //CmdAnimate("IsAttacking", isAttacking, false);
+            //CmdAnimate("IsDefending", isDefending, false);
 
-            CmdUpdateServer(isAttacking, isDefending, Health);
+            //CmdUpdateServer(isAttacking, isDefending, Health);
         }
 
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
