@@ -99,8 +99,8 @@ MonoBehaviour:
   m_OfflineScene: Main
   m_OnlineScene: Main
   m_SpawnPrefabs: []
-  m_CustomConfig: 1
-  m_MaxConnections: 1
+  m_CustomConfig: 0
+  m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1440
     m_FragmentSize: 500
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
   matchName: default
-  matchSize: 1
+  matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
 --- !u!114 &114463489818009528
