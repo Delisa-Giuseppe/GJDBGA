@@ -24,6 +24,7 @@ public class WeaponStat : MonoBehaviour {
             pc.Defence = Defence;
             pc.PlayerSpeed = PlayerSpeed;
             pc.maxHealth = Defence * pc.maxHealth;
+            pc.Health = pc.maxHealth;
             player = pc;
             transform.parent = pc.weaponPosition;
             transform.position = pc.weaponPosition.position;
