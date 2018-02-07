@@ -29,12 +29,14 @@ public class WeaponStat : MonoBehaviour {
             pc.isArmed = true;
             pc.weapon = this;
             GetComponent<MeshCollider>().enabled = false;
+            GetComponent<AudioSource>().Play();
         }
         else if (pc && pc.playerID != player.playerID && !pc.isDefending)
         {
             pc.anim.SetTrigger("TakeDamage");
             pc.CmdAnimate("TakeDamage", false, false);
             pc.Health -= player.DamageOutput;
+            pc.audio.PlayOneShot(pc.soundsPlayer[0], 1);
             pc.CmdUpdateServer(pc.isAttacking, pc.isDefending, pc.Health);
             pc.labelPlayer.text = " HEALTH : " + pc.Health;
         }
