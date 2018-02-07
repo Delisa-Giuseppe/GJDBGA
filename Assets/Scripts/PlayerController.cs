@@ -9,7 +9,7 @@ using System;
 public class PlayerController : NetworkBehaviour
 {
     [SyncVar] public int playerID;
-    [SyncVar(hook = "TakeDamage")] public int Health;
+    [SyncVar] public int Health;
     [SyncVar] public int DamageOutput;
     [SyncVar] public int Defence;
     [SyncVar] public float PlayerSpeed;
