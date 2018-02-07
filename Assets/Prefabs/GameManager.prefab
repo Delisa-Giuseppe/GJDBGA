@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7b8cf7bf636c24f874c98834f5c82c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayer: 1
+  maxPlayer: 2
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}

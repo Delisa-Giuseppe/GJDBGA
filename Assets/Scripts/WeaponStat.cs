@@ -34,5 +34,9 @@ public class WeaponStat : MonoBehaviour {
         {
             pc.TakeDamage(player.DamageOutput);
         }
+
+
+
+
     }
 }
