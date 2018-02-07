@@ -35,7 +35,6 @@ public class MyIp : NetworkBehaviour {
     
     public void StartHASHost()
     {
-
         GetComponent<NetworkManager>().StartHost();
     }
 

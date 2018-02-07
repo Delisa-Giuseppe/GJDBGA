@@ -2,18 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GameManager : MonoBehaviour {
-
+public class GameManager : NetworkBehaviour
+{
+    public Canvas nPlayer;
     public int maxPlayer = 4;
     public static bool startGame;
     public List<GameObject> spawnPoints;
     private List<PlayerController> playerList = new List<PlayerController>();
     private bool isInitialized;
+    private NetworkManager netM;
 
     private void Start()
     {
         startGame = false;
+        netM = GameObject.FindObjectOfType<NetworkManager>().GetComponent<NetworkManager>();
+    }
+
+    public override void OnStartServer()
+    {
+        nPlayer.gameObject.SetActive(true);
     }
 
     public List<PlayerController> PlayerList
@@ -47,5 +56,20 @@ public class GameManager : MonoBehaviour {
             player.labelPlayer.text = "PLAYER " + player.playerID;
             player.transform.position = spawnPoints[id].transform.position;
         }
+    }
+
+    public void TwoPlayerGame ()
+    {
+        netM.matchSize = 2;
+    }
+
+    public void ThreePlayerGame()
+    {
+        netM.matchSize = 3;
+    }
+
+    public void FourPlayerGame()
+    {
+        netM.matchSize = 4;
     }
 }
