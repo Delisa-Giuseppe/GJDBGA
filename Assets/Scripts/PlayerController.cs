@@ -54,11 +54,6 @@ public class PlayerController : NetworkBehaviour
         if(isLocalPlayer)
         {
             PlayerPointEnable();
-            mesh.material = playerMat[playerID];
-            if (playerID == 1 || playerID == 2)
-                helmet.SetActive(true);
-            else
-                helmet.SetActive(false);
             //CmdUpdateMaterial(mesh.gameObject, playerID, helmet);
         }
     }
@@ -104,6 +99,11 @@ public class PlayerController : NetworkBehaviour
     void PlayerPointEnable()
     {
         playerPoint.SetActive(true);
+        mesh.material = playerMat[playerID];
+        if (playerID == 1 || playerID == 2)
+            helmet.SetActive(true);
+        else
+            helmet.SetActive(false);
     }
 
     [Client]
