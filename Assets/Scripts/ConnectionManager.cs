@@ -47,4 +47,11 @@ public class ConnectionManager : NetworkBehaviour
         firstCanvas.gameObject.SetActive(false);
         IPCanvas.gameObject.SetActive(true);
     }
+
+    public void MoveToFirstCanvas()
+    {
+        firstCanvas.gameObject.SetActive(true);
+        IPCanvas.gameObject.SetActive(false);
+        btnCanvas.gameObject.SetActive(false);
+    }
 }

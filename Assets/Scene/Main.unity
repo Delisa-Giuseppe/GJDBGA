@@ -1045,6 +1045,11 @@ Prefab:
       propertyPath: spawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1897328642}
+    - target: {fileID: 114365009338417672, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: maxPlayer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1214e15fa58c534aab5768adf7911ea, type: 2}
   m_IsPrefabParent: 0
