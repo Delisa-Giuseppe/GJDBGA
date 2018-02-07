@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
+    public string IpAddress;
+    public string Port;
+
     public Canvas nPlayer;
-    public int maxPlayer = 4;
+    public int maxPlayer = 1;
     public static bool startGame;
     public List<GameObject> spawnPoints;
     private List<PlayerController> playerList = new List<PlayerController>();
@@ -18,11 +22,6 @@ public class GameManager : NetworkBehaviour
     {
         startGame = false;
         netM = GameObject.FindObjectOfType<NetworkManager>().GetComponent<NetworkManager>();
-    }
-
-    public override void OnStartServer()
-    {
-        nPlayer.gameObject.SetActive(true);
     }
 
     public List<PlayerController> PlayerList
@@ -58,18 +57,21 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void TwoPlayerGame ()
+    public void SetPlayerOnGame (int nPlayers)
     {
-        NetworkManager.singleton.maxConnections = 2;
+        maxPlayer = nPlayers;
     }
 
-    public void ThreePlayerGame()
+    public void StartHASHost()
     {
-        NetworkManager.singleton.maxConnections = 3;
+        GetComponent<NetworkManager>().StartHost(null, maxPlayer);
+        SceneManager.LoadScene(GetComponent<NetworkManager>().onlineScene);
     }
 
-    public void FourPlayerGame()
+    public void StartHASClient()
     {
-        NetworkManager.singleton.maxConnections = 4;
+        NetworkManager.singleton.networkAddress = ("192.168.65.70");
+        //NetworkManager.singleton.networkPort = int.Parse(Port);
+        NetworkManager.singleton.StartClient();
     }
 }

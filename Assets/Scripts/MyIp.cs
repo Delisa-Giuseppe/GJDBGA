@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MyIp : NetworkBehaviour {
@@ -33,11 +34,6 @@ public class MyIp : NetworkBehaviour {
         }
     }
     
-    public void StartHASHost()
-    {
-        GetComponent<NetworkManager>().StartHost(null, 1);
-    }
-
     public string LocalIPAddress()
     {
         IPHostEntry host;
