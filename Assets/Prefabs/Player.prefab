@@ -2507,7 +2507,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2724,10 +2724,10 @@ MonoBehaviour:
   weapon: {fileID: 0}
   mesh: {fileID: 137528121730158196}
   soundsPlayer:
-  - {fileID: 8300000, guid: a629429fb0ee75f45b9394977c040155, type: 3}
-  - {fileID: 8300000, guid: 99c6b22626cb96b498f53a36286ec7c9, type: 3}
-  - {fileID: 8300000, guid: e651d1cfc83de9e4591bd7df31e100c7, type: 3}
-  - {fileID: 8300000, guid: 967f0e2a4441c7a47b3bf97f64d49871, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   audio: {fileID: 0}
   playerMovementSpeed: 6
   isDead: 0

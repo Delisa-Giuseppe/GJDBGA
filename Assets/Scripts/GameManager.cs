@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
         if (!isInitialized && playerList.Count == maxPlayer)
         {
             InitializePlayer();
-            startGame = true;
         }
     }
 
