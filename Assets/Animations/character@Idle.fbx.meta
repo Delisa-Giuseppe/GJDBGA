@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 91f56c7672399a2458f38d8487348b9d
-timeCreated: 1517955756
+guid: 830bd6346d20d6d47ae327fc236ed21a
+timeCreated: 1517994035
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -140,7 +140,7 @@ ModelImporter:
     400130: mixamorig:Spine1
     400132: mixamorig:Spine2
     4300000: character
-    7400000: Shield Block Idle
+    7400000: Idle
     9500000: //RootNode
     13700000: character
   materials:
@@ -168,10 +168,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Shield Block Idle
+      name: Idle
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 42
+      lastFrame: 66
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
