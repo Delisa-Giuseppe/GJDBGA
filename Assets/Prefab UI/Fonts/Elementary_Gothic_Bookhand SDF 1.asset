@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
-  m_Name: Elementary_Gothic_Bookhand SDF
+  m_Name: Elementary_Gothic_Bookhand SDF 1
   m_EditorClassIdentifier: 
-  hashCode: 252298289
+  hashCode: -125069152
   material: {fileID: 21992521318534936}
   materialHashCode: -543553638
   fontAssetType: 1
@@ -1022,7 +1022,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.2
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333

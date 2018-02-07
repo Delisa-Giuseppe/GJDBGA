@@ -65,13 +65,12 @@ public class GameManager : NetworkBehaviour
     public void StartHASHost()
     {
         GetComponent<NetworkManager>().StartHost(null, maxPlayer);
-        SceneManager.LoadScene(GetComponent<NetworkManager>().onlineScene);
     }
 
     public void StartHASClient()
     {
-        NetworkManager.singleton.networkAddress = ("192.168.65.70");
-        //NetworkManager.singleton.networkPort = int.Parse(Port);
-        NetworkManager.singleton.StartClient();
+        GetComponent<NetworkManager>().networkAddress = ("192.168.65.70");
+        GetComponent<NetworkManager>().networkPort = 7777;
+        GetComponent<NetworkManager>().StartClient();
     }
 }
