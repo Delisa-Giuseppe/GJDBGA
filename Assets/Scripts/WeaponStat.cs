@@ -10,6 +10,8 @@ public class WeaponStat : MonoBehaviour {
     public float PlayerSpeed;
     public PlayerController player;
 
+    bool hit;
+
     void Start () {
         player = null;
 	}
@@ -21,46 +23,55 @@ public class WeaponStat : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        ManageWeapon(other);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        ManageWeapon(other);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        ManageWeapon(other);
-    }
-
-    void ManageWeapon(Collider other)
-    {
         PlayerController pc = other.GetComponent<PlayerController>();
-        if (player)
-            Debug.Log(player.isAttacking);
 
-        if (pc)
+        if (pc && !player)
         {
-            if (!player)
-            {
-                pc.DamageOutput = DamageOutput;
-                pc.Defence = Defence;
-                pc.PlayerSpeed = PlayerSpeed;
-                player = pc;
-                transform.parent = pc.weaponPosition;
-                transform.position = pc.weaponPosition.position;
-                pc.isArmed = true;
-            }
-            else if (pc.playerID != player.playerID && player.isAttacking)
-            {
-                if (other.gameObject.GetComponent<PlayerStat>() != null)
-                {
-                    Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
-                    pc.Health -= player.DamageOutput;
-                    pc.labelPlayer.text = " HEALTH : " + pc.Health;
-                }
-            }
+            pc.DamageOutput = DamageOutput;
+            pc.Defence = Defence;
+            pc.PlayerSpeed = PlayerSpeed;
+            player = pc;
+            transform.parent = pc.weaponPosition;
+            transform.position = pc.weaponPosition.position;
+            pc.isArmed = true;
+            pc.weapon = this;
+            GetComponent<SphereCollider>().enabled = false;
+        }
+        else if (pc && pc.playerID != player.playerID)
+        {
+            Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
+            pc.Health -= player.DamageOutput;
+            pc.labelPlayer.text = " HEALTH : " + pc.Health;
         }
     }
+
+    //void ManageWeapon(Collider other)
+    //{
+    //    PlayerController pc = other.GetComponent<PlayerController>();
+    //    if (player)
+    //        Debug.Log(player.isAttacking);
+
+    //    if (pc)
+    //    {
+    //        if (!player)
+    //        {
+    //            pc.DamageOutput = DamageOutput;
+    //            pc.Defence = Defence;
+    //            pc.PlayerSpeed = PlayerSpeed;
+    //            player = pc;
+    //            transform.parent = pc.weaponPosition;
+    //            transform.position = pc.weaponPosition.position;
+    //            pc.isArmed = true;
+    //        }
+    //        else if (pc.playerID != player.playerID && player.isAttacking)
+    //        {
+    //            if (other.gameObject.GetComponent<PlayerStat>() != null)
+    //            {
+    //                Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
+    //                pc.Health -= player.DamageOutput;
+    //                pc.labelPlayer.text = " HEALTH : " + pc.Health;
+    //            }
+    //        }
+    //    }
+    //}
 }

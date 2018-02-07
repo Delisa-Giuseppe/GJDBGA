@@ -18,6 +18,10 @@ public class PlayerController : NetworkBehaviour
     public Text labelPlayer;
     public GameObject playerPoint;
     public Transform weaponPosition;
+    [HideInInspector]
+    public Animator anim;
+    [HideInInspector]
+    public WeaponStat weapon;
 
     [Range (0.1f, 0.15f)]
     public float playerMovementSpeed;
@@ -27,7 +31,6 @@ public class PlayerController : NetworkBehaviour
     private Vector3 cursorPosition;
     private Vector3 playerDirection;
     private GameManager gm;
-    private Animator anim;
     private bool start;
     
     void Start()
@@ -169,6 +172,9 @@ public class PlayerController : NetworkBehaviour
                 anim.SetTrigger("StartGame");
                 start = true;
             }
+
+            anim.SetBool("IsAttacking", isAttacking);
+            anim.SetBool("IsDefending", IsDefending);
         }
         else
         {
@@ -177,6 +183,16 @@ public class PlayerController : NetworkBehaviour
 
         ps.OnDefence();
         CmdUpdate();
+    }
+
+    public void InitAttack()
+    {
+        weapon.GetComponent<SphereCollider>().enabled = true;
+    }
+
+    public void EndAttack()
+    {
+        weapon.GetComponent<SphereCollider>().enabled = false;
     }
 
     public bool IsDefending
