@@ -8,14 +8,14 @@ using System;
 
 public class PlayerController : NetworkBehaviour
 {
-    [SyncVar] public int playerID;
-    [SyncVar] public int Health;
-    [SyncVar] public int DamageOutput;
-    [SyncVar] public int Defence;
-    [SyncVar] public float PlayerSpeed;
-    [SyncVar(hook = "OnDefence")] public bool isDefending;
-    [SyncVar] public bool isAttacking;
-    [SyncVar] public bool isArmed;
+    public int playerID;
+    public int Health;
+    public int DamageOutput;
+    public int Defence;
+    public float PlayerSpeed;
+    public bool isDefending;
+    public bool isAttacking;
+    public bool isArmed;
     public Text labelPlayer;
     public GameObject playerPoint;
     public Transform weaponPosition;
@@ -40,15 +40,14 @@ public class PlayerController : NetworkBehaviour
     
     void Start()
     {
-        anim = GetComponent<Animator>();
-        lr = GetComponent<LineRenderer>();
-        gm = FindObjectOfType<GameManager>();
-        gm.PlayerList.Add(this);
-        isDefending = false;
-        isAttacking = false;
-
-        if(isLocalPlayer)
+        if (!isLocalPlayer)
         {
+            anim = GetComponent<Animator>();
+            lr = GetComponent<LineRenderer>();
+            gm = FindObjectOfType<GameManager>();
+            gm.PlayerList.Add(this);
+            isDefending = false;
+            isAttacking = false;
             PlayerPointEnable();
             //CmdUpdateMaterial(mesh.gameObject, playerID, helmet);
         }
@@ -56,6 +55,9 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
+        if (!isLocalPlayer)
+            return;
+
         if(!isDead)
         {
             if (GameManager.startGame)
@@ -73,22 +75,22 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    [Command]
-    void CmdUpdateMaterial(GameObject mesh, int id, GameObject helmet)
-    {
-        if(mesh)
-            RpcUpdateMaterial(mesh, id, helmet);
-    }
+    //[Command]
+    //void CmdUpdateMaterial(GameObject mesh, int id, GameObject helmet)
+    //{
+    //    if(mesh)
+    //        RpcUpdateMaterial(mesh, id, helmet);
+    //}
 
-    [ClientRpc]
-    void RpcUpdateMaterial(GameObject mesh, int id, GameObject helmet)
-    {
-        mesh.GetComponent<SkinnedMeshRenderer>().material = playerMat[id];
-        if (id == 1 || id == 2)
-            helmet.SetActive(true);
-        else
-            helmet.SetActive(false);
-    }
+    //[ClientRpc]
+    //void RpcUpdateMaterial(GameObject mesh, int id, GameObject helmet)
+    //{
+    //    mesh.GetComponent<SkinnedMeshRenderer>().material = playerMat[id];
+    //    if (id == 1 || id == 2)
+    //        helmet.SetActive(true);
+    //    else
+    //        helmet.SetActive(false);
+    //}
 
     [Client]
     void PlayerPointEnable()
@@ -141,65 +143,62 @@ public class PlayerController : NetworkBehaviour
 
     void PlayerMovement ()
     {
-        if (isLocalPlayer)
+        RaycastHit hit;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit)/* && hit.transform.tag == "Terrain"*/)
         {
-            RaycastHit hit;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit)/* && hit.transform.tag == "Terrain"*/)
+            cursorPosition = hit.point;
+            cursorPosition.y = transform.position.y;
+            playerDirection = (cursorPosition - transform.position).normalized;
+            if (Vector3.Distance(cursorPosition, transform.position) > 1)
             {
-                cursorPosition = hit.point;
-                cursorPosition.y = transform.position.y;
-                playerDirection = (cursorPosition - transform.position).normalized;
-                if (Vector3.Distance(cursorPosition, transform.position) > 1)
-                {
-                    transform.DOLookAt(cursorPosition, 0.5f);
-                    if(!isDefending)
-                        GetComponent<Rigidbody>().velocity = playerDirection * playerMovementSpeed;
-                }
-
-                cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
-                lr.SetPosition(0, transform.position);
-                lr.SetPosition(1, cursorPosition);
+                transform.DOLookAt(cursorPosition, 0.5f);
+                if(!isDefending)
+                    GetComponent<Rigidbody>().velocity = playerDirection * playerMovementSpeed;
             }
 
-            if (Input.GetMouseButtonDown(0) && !isDefending && isArmed)//Tasto Sinistro
-            {
-                isAttacking = true;
-            }
-            else
-            {
-                isAttacking = false;
-            }
-
-            if (Input.GetMouseButton(1) && !isAttacking)//Tast Destro
-            {
-                isDefending = true;
-            }
-            else
-            {
-                isDefending = false;
-            }
-
-            anim.SetTrigger("StartGame");
-            //CmdAnimate("StartGame", false, true);
-
-            anim.SetBool("IsAttacking", isAttacking);
-            anim.SetBool("IsDefending", isDefending);
-
-            //CmdAnimate("IsAttacking", isAttacking, false);
-            //CmdAnimate("IsDefending", isDefending, false);
-
-            //CmdUpdateServer(isAttacking, isDefending, Health);
+            cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, cursorPosition);
         }
 
+        if (Input.GetMouseButtonDown(0) && !isDefending && isArmed)//Tasto Sinistro
+        {
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+
+        if (Input.GetMouseButton(1) && !isAttacking)//Tast Destro
+        {
+            isDefending = true;
+        }
+        else
+        {
+            isDefending = false;
+        }
+
+        anim.SetTrigger("StartGame");
+        //CmdAnimate("StartGame", false, true);
+
+        anim.SetBool("IsAttacking", isAttacking);
+        anim.SetBool("IsDefending", isDefending);
+
+        //CmdAnimate("IsAttacking", isAttacking, false);
+        //CmdAnimate("IsDefending", isDefending, false);
+
+        //CmdUpdateServer(isAttacking, isDefending, Health);
+        OnDefence();
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
-    public void OnDefence(bool defence)
+    public void OnDefence()
     {
-        if (defence)
+        if (isDefending)
         {
             shield.SetActive(true);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -220,6 +219,11 @@ public class PlayerController : NetworkBehaviour
         weapon.GetComponent<MeshCollider>().enabled = false;
     }
 
-
+    public void TakeDamage(int damage)
+    {
+        anim.SetTrigger("TakeDamage");
+        Health -= damage;
+        labelPlayer.text = " HEALTH : " + Health;
+    }
 
 }

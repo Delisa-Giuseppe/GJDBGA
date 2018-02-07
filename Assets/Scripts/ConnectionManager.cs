@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class ConnectionManager : NetworkBehaviour
 {
+    private string IpAddress;
     public Canvas firstCanvas;
     public Canvas btnCanvas;
+    public Canvas IPCanvas;
 
     private int playersNumber;
 
@@ -16,7 +19,7 @@ public class ConnectionManager : NetworkBehaviour
 
     public void StartHASClient()
     {
-        GetComponent<NetworkManager>().networkAddress = ("192.168.65.70");
+        GetComponent<NetworkManager>().networkAddress = IpAddress;
         GetComponent<NetworkManager>().networkPort = 7777;
         GetComponent<NetworkManager>().StartClient();
     }
@@ -27,9 +30,28 @@ public class ConnectionManager : NetworkBehaviour
         StartHASHost();
     }
 
+    public void SetIP ()
+    {
+        IpAddress = IPCanvas.transform.Find("InputField").GetComponent<InputField>().text;
+        StartHASClient();
+    }
+
     public void MoveToNPlayerCanvas()
     {
         firstCanvas.gameObject.SetActive(false);
         btnCanvas.gameObject.SetActive(true);
+    }
+
+    public void MoveToIPCanvas()
+    {
+        firstCanvas.gameObject.SetActive(false);
+        IPCanvas.gameObject.SetActive(true);
+    }
+
+    public void MoveToFirstCanvas()
+    {
+        firstCanvas.gameObject.SetActive(true);
+        IPCanvas.gameObject.SetActive(false);
+        btnCanvas.gameObject.SetActive(false);
     }
 }
