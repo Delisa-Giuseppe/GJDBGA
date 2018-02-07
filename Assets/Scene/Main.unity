@@ -1487,11 +1487,6 @@ Prefab:
       propertyPath: IPText
       value: 
       objectReference: {fileID: 1220221301}
-    - target: {fileID: 114457678369891346, guid: dfa17d87b420dcd4c868d963b6637900,
-        type: 2}
-      propertyPath: matchSize
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfa17d87b420dcd4c868d963b6637900, type: 2}
   m_IsPrefabParent: 0

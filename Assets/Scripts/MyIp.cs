@@ -35,7 +35,7 @@ public class MyIp : NetworkBehaviour {
     
     public void StartHASHost()
     {
-        GetComponent<NetworkManager>().StartHost();
+        GetComponent<NetworkManager>().StartHost(null, 1);
     }
 
     public string LocalIPAddress()
