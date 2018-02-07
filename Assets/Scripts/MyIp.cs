@@ -33,6 +33,12 @@ public class MyIp : NetworkBehaviour {
         }
     }
     
+    public void StartHASHost()
+    {
+
+        GetComponent<NetworkManager>().StartHost();
+    }
+
     public string LocalIPAddress()
     {
         IPHostEntry host;
