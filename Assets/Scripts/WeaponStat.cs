@@ -28,7 +28,7 @@ public class WeaponStat : MonoBehaviour {
             transform.position = pc.weaponPosition.position;
             pc.isArmed = true;
             pc.weapon = this;
-            GetComponent<SphereCollider>().enabled = false;
+            GetComponent<MeshCollider>().enabled = false;
         }
         else if (pc && pc.playerID != player.playerID && !pc.isDefending)
         {

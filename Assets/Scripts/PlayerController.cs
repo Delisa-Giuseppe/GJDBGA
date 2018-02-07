@@ -20,10 +20,14 @@ public class PlayerController : NetworkBehaviour
     public GameObject playerPoint;
     public Transform weaponPosition;
     public GameObject shield;
+    public GameObject helmet;
     [HideInInspector]
     public Animator anim;
     [HideInInspector]
     public WeaponStat weapon;
+    public SkinnedMeshRenderer mesh;
+
+    public List<Material> playerMat;
 
     [Range (1, 10)]
     public int playerMovementSpeed;
@@ -44,7 +48,15 @@ public class PlayerController : NetworkBehaviour
         isAttacking = false;
 
         if(isLocalPlayer)
+        {
             PlayerPointEnable();
+            mesh.material = playerMat[playerID];
+            if (playerID == 1 || playerID == 2)
+                helmet.SetActive(true);
+            else
+                helmet.SetActive(false);
+            //CmdUpdateMaterial(mesh.gameObject, playerID, helmet);
+        }
     }
 
     void Update()
@@ -64,6 +76,23 @@ public class PlayerController : NetworkBehaviour
                 PlayerPointDisable();
             }
         }
+    }
+
+    [Command]
+    void CmdUpdateMaterial(GameObject mesh, int id, GameObject helmet)
+    {
+        if(mesh)
+            RpcUpdateMaterial(mesh, id, helmet);
+    }
+
+    [ClientRpc]
+    void RpcUpdateMaterial(GameObject mesh, int id, GameObject helmet)
+    {
+        mesh.GetComponent<SkinnedMeshRenderer>().material = playerMat[id];
+        if (id == 1 || id == 2)
+            helmet.SetActive(true);
+        else
+            helmet.SetActive(false);
     }
 
     [Client]
@@ -219,11 +248,14 @@ public class PlayerController : NetworkBehaviour
 
     public void InitAttack()
     {
-        weapon.GetComponent<SphereCollider>().enabled = true;
+        weapon.GetComponent<MeshCollider>().enabled = true;
     }
 
     public void EndAttack()
     {
-        weapon.GetComponent<SphereCollider>().enabled = false;
+        weapon.GetComponent<MeshCollider>().enabled = false;
     }
+
+
+
 }
