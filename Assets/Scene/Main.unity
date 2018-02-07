@@ -203,12 +203,49 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &366932161 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1332111119136938, guid: e1214e15fa58c534aab5768adf7911ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1653939313}
 --- !u!114 &366932162 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114213503251739160, guid: e1214e15fa58c534aab5768adf7911ea,
     type: 2}
   m_PrefabInternal: {fileID: 1653939313}
   m_Script: {fileID: 11500000, guid: 6c7b8cf7bf636c24f874c98834f5c82c, type: 3}
+--- !u!114 &366932163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 366932161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 225
+    i1: 33
+    i2: 78
+    i3: 21
+    i4: 250
+    i5: 88
+    i6: 197
+    i7: 52
+    i8: 170
+    i9: 181
+    i10: 118
+    i11: 138
+    i12: 223
+    i13: 121
+    i14: 17
+    i15: 234
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &397216494
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &397216495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -968,6 +1005,11 @@ Prefab:
       propertyPath: spawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1897328642}
+    - target: {fileID: 114213503251739160, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: nPlayer
+      value: 
+      objectReference: {fileID: 397216498}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1214e15fa58c534aab5768adf7911ea, type: 2}
   m_IsPrefabParent: 0
