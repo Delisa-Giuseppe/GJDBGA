@@ -15,10 +15,10 @@ public class MyIp : NetworkBehaviour {
    public Text IPText;
 	// Use this for initialization
 	void Start () {
-     IPText = transform.Find("Text").GetComponent<Text>();
-        myIP = "";
-        if(IPText)
-            IPText.text = myIP;
+     //IPText = transform.Find("Text").GetComponent<Text>();
+     //   myIP = "";
+     //   if(IPText)
+     //       IPText.text = myIP;
 
     }
 	
@@ -26,10 +26,10 @@ public class MyIp : NetworkBehaviour {
 	void Update () {
 
 
-        myIP = LocalIPAddress();
+        //myIP = LocalIPAddress();
         
 
-            IPText.text ="You are the host, this is your IP "+ System.Environment.NewLine + LocalIPAddress();          
+        //    IPText.text ="You are the host, this is your IP "+ System.Environment.NewLine + LocalIPAddress();          
        
     }
     
