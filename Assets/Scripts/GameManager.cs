@@ -69,9 +69,8 @@ public class GameManager : NetworkBehaviour
 
     public void StartHASClient()
     {
-        NetworkManager.singleton.networkAddress = ("192.168.65.70");
-        NetworkManager.singleton.networkPort = 7777;
-        //Debug.Log(NetworkManager.singleton.networkPort);
-        NetworkManager.singleton.StartClient();
+        GetComponent<NetworkManager>().networkAddress = ("192.168.65.70");
+        GetComponent<NetworkManager>().networkPort = 7777;
+        GetComponent<NetworkManager>().StartClient();
     }
 }
