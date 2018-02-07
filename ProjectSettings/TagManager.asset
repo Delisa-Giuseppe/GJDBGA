@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Weapon
+  - Magma
   layers:
   - Default
   - TransparentFX

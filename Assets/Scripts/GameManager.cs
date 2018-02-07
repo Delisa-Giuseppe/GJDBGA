@@ -61,4 +61,43 @@ public class GameManager : MonoBehaviour
             player.transform.position = spawnPoints[id].transform.position;
         }
     }
+
+
+    //int contatore morti
+    public int DeathCounter;
+    //when player muore contatore++
+    void checkmorte()
+    {
+        foreach (var player in playerList)
+        {
+            if (player.isDead == true)
+            {
+                DeathCounter++;
+            }
+        }
+
+    }
+
+    void checkVictory()
+    {
+        if(DeathCounter==3)
+        {
+            foreach (var player in playerList)
+            {
+                if (player.isDead == false)
+                {
+
+                }
+            }
+        }
+        
+    }
+
+    //when contatore 3   
+    //check vittoria(controllare player vivo) sommare 1pt al player vivo, check pt player if 3 Vittoria
+    //else
+    //contatore 0
+    //respawn player totale (10vit)
+    //bool death false;
+    //allocate to spawnpoint;
 }
