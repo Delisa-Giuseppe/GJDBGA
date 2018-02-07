@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         {
             int id = playerList.IndexOf(player);
             player.playerID = id + 1;
-            //player.labelPlayer.text = "PLAYER " + player.playerID;
+            player.labelPlayer.text = "PLAYER " + player.playerID;
             player.mesh.GetComponent<SkinnedMeshRenderer>().material = playerMat[id];
             if (id == 1 || id == 2)
                 player.helmet.SetActive(true);
