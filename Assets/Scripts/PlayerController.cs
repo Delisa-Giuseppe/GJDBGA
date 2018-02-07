@@ -90,11 +90,12 @@ public class PlayerController : NetworkBehaviour
     void PlayerPointEnable()
     {
         playerPoint.SetActive(true);
-        mesh.material = playerMat[playerID];
-        if (playerID == 1 || playerID == 2)
-            helmet.SetActive(true);
-        else
-            helmet.SetActive(false);
+        //int id = playerID - 1;
+        //mesh.material = playerMat[id];
+        //if (id == 1 || id == 2)
+        //    helmet.SetActive(true);
+        //else
+        //    helmet.SetActive(false);
     }
 
     [Client]
@@ -189,8 +190,11 @@ public class PlayerController : NetworkBehaviour
             CmdAnimate("IsDefending", isDefending, false);
 
             CmdUpdateServer(isAttacking, isDefending, Health);
+
+           
         }
 
+        labelPlayer.text = Health.ToString();
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
@@ -210,31 +214,28 @@ public class PlayerController : NetworkBehaviour
 
     public void InitAttack()
     {
-        weapon.GetComponent<MeshCollider>().enabled = true;
+        weapon.gameObject.GetComponent<MeshCollider>().enabled = true;
     }
 
     public void EndAttack()
     {
-        weapon.GetComponent<MeshCollider>().enabled = false;
+        weapon.gameObject.GetComponent<MeshCollider>().enabled = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(PlayerController pc, int damage)
     {
-        if (!isServer)
-            return;
+        int id = pc.playerID - 1;
+        gm.playerList[id].Health -= damage;
+        gm.playerList[id].anim.SetTrigger("TakeDamage");
 
-        anim.SetTrigger("TakeDamage");
-        Health -= damage;
-        labelPlayer.text = " HEALTH : " + Health;
-
-        if (Health <= 0)
+        if (gm.playerList[id].Health <= 0)
         {
-            Health = 0;
-            isDead = true;
-            anim.SetTrigger("Death");
-            audio.PlayOneShot(soundsPlayer[1], 1);
-            CmdAnimate("Death", false, false);
-            PlayerPointDisable();
+            gm.playerList[id].Health = 0;
+            gm.playerList[id].isDead = true;
+            gm.playerList[id].anim.SetTrigger("Death");
+            gm.playerList[id].audio.PlayOneShot(soundsPlayer[1], 1);
+            gm.playerList[id].CmdAnimate("Death", false, false);
+            gm.playerList[id].PlayerPointDisable();
         }
     }
 }
