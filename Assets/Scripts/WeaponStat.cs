@@ -18,7 +18,7 @@ public class WeaponStat : MonoBehaviour {
     {
         PlayerController pc = other.GetComponent<PlayerController>();
 
-        if (pc && !player)
+        if (pc && !pc.isArmed && !player)
         {
             pc.DamageOutput = DamageOutput;
             pc.Defence = Defence;
@@ -34,9 +34,5 @@ public class WeaponStat : MonoBehaviour {
         {
             pc.TakeDamage(player.DamageOutput);
         }
-
-
-
-
     }
 }

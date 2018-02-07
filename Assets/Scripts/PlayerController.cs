@@ -9,7 +9,7 @@ using System;
 public class PlayerController : NetworkBehaviour
 {
     [SyncVar] public int playerID;
-    [SyncVar] public int Health;
+    [SyncVar(hook = "TakeDamage")] public int Health;
     [SyncVar] public int DamageOutput;
     [SyncVar] public int Defence;
     [SyncVar] public float PlayerSpeed;
@@ -65,15 +65,6 @@ public class PlayerController : NetworkBehaviour
             if (GameManager.startGame)
             {
                 PlayerMovement();
-            }
-
-            if (Health <= 0)
-            {
-                isDead = true;
-                anim.SetTrigger("Death");
-                audio.PlayOneShot(soundsPlayer[1], 1);
-                CmdAnimate("Death", false, false);
-                PlayerPointDisable();
             }
         }
     }
@@ -229,8 +220,21 @@ public class PlayerController : NetworkBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (!isServer)
+            return;
+
         anim.SetTrigger("TakeDamage");
         Health -= damage;
         labelPlayer.text = " HEALTH : " + Health;
+
+        if (Health <= 0)
+        {
+            Health = 0;
+            isDead = true;
+            anim.SetTrigger("Death");
+            audio.PlayOneShot(soundsPlayer[1], 1);
+            CmdAnimate("Death", false, false);
+            PlayerPointDisable();
+        }
     }
 }
