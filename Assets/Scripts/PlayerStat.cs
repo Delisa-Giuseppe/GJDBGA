@@ -7,10 +7,7 @@ public class PlayerStat : MonoBehaviour
 {
 
     //Stat
-    public int Health;
-    public int DamageOutput;
-    public int Defence;
-    public float PlayerSpeed;
+
 
     //Combat State
     [SerializeField] private bool isAttacking;
@@ -42,15 +39,15 @@ public class PlayerStat : MonoBehaviour
     {
 
         //Health=0; GameOver;
-        if (Health <= 0)
-        {
-            isAlive = false;
-        }
-        playerState();
+        //if (Health <= 0)
+        //{
+        //    isAlive = false;
+        //}
+        //PlayerState();
         
     }
 
-    private void playerState()
+    private void PlayerState()
     {
         if (!isAlive)//se il player non ha vita, Muore;
         {
@@ -72,35 +69,6 @@ public class PlayerStat : MonoBehaviour
             ShieldCollider.enabled = false;
             ShieldRenderer.enabled = false;
             this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag != "Terrain")
-        {
-            if(!pc.IsDefending)
-            {
-                if (other.tag == "Weapon" && !isArmed)
-                {
-                    DamageOutput = other.GetComponent<WeaponStat>().DamageOutput;
-                    Defence = other.GetComponent<WeaponStat>().Defence;
-                    PlayerSpeed = other.GetComponent<WeaponStat>().PlayerSpeed;
-                    other.transform.parent = this.gameObject.transform;
-                    isArmed = true;
-                }
-                if (isArmed && IsAttacking)
-                {
-                    if (pc.playerID!= other.gameObject.GetComponent<PlayerController>().playerID)
-                    {
-                        if (other.gameObject.GetComponent<PlayerStat>() != null)
-                        {
-                            Debug.Log("Il guerriero "+this.pc.playerID + " Ha colpito il guerriero" +other.gameObject.GetComponent<PlayerController>().playerID);
-                            other.GetComponent<PlayerStat>().Health -= other.GetComponent<PlayerStat>().DamageOutput;
-                        }
-                    }
-                }
-            }
         }
     }
 
