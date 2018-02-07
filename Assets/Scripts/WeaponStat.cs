@@ -30,9 +30,9 @@ public class WeaponStat : MonoBehaviour {
             pc.weapon = this;
             GetComponent<MeshCollider>().enabled = false;
         }
-        else if (pc && pc.playerID != player.playerID && !pc.isDefending)
+        else if (pc && pc != player && !pc.isDefending)
         {
-            pc.TakeDamage(player.DamageOutput);
+            pc.TakeDamage(pc, player.DamageOutput);
         }
     }
 }
