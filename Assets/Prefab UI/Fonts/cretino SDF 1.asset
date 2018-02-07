@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: cretino SDF 1
   m_EditorClassIdentifier: 
-  hashCode: -132699047
+  hashCode: 1519624776
   material: {fileID: 21723082800925806}
   materialHashCode: -580634318
   fontAssetType: 1
@@ -950,7 +950,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.189
+    - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333

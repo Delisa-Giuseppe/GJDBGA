@@ -113,8 +113,8 @@ MonoBehaviour:
     m_Settings:
       tonemapping:
         tonemapper: 2
-        neutralBlackIn: 0.063
-        neutralWhiteIn: 7
+        neutralBlackIn: 0.027
+        neutralWhiteIn: 9.8
         neutralBlackOut: -0.022
         neutralWhiteOut: 4
         neutralWhiteLevel: 7.5
@@ -125,7 +125,7 @@ MonoBehaviour:
         tint: -17
         hueShift: -25
         saturation: 1.27
-        contrast: 0.86
+        contrast: 0.82
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
