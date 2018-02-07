@@ -244,7 +244,7 @@ MonoBehaviour:
     i13: 121
     i14: 17
     i15: 234
-  m_ServerOnly: 1
+  m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!1 &397216494
 GameObject:
@@ -1010,6 +1010,11 @@ Prefab:
       propertyPath: nPlayer
       value: 
       objectReference: {fileID: 397216498}
+    - target: {fileID: 114213503251739160, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: maxPlayer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1214e15fa58c534aab5768adf7911ea, type: 2}
   m_IsPrefabParent: 0
@@ -1485,7 +1490,7 @@ Prefab:
     - target: {fileID: 114457678369891346, guid: dfa17d87b420dcd4c868d963b6637900,
         type: 2}
       propertyPath: matchSize
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfa17d87b420dcd4c868d963b6637900, type: 2}

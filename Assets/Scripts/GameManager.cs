@@ -60,16 +60,16 @@ public class GameManager : NetworkBehaviour
 
     public void TwoPlayerGame ()
     {
-        netM.matchSize = 2;
+        NetworkManager.singleton.maxConnections = 2;
     }
 
     public void ThreePlayerGame()
     {
-        netM.matchSize = 3;
+        NetworkManager.singleton.maxConnections = 3;
     }
 
     public void FourPlayerGame()
     {
-        netM.matchSize = 4;
+        NetworkManager.singleton.maxConnections = 4;
     }
 }
