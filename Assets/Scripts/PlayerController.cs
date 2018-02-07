@@ -16,6 +16,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar(hook = "OnDefence")] public bool isDefending;
     [SyncVar] public bool isAttacking;
     [SyncVar] public bool isArmed;
+    public int maxHealth;
     public Text labelPlayer;
     public GameObject playerPoint;
     public Transform weaponPosition;
@@ -27,7 +28,6 @@ public class PlayerController : NetworkBehaviour
     public WeaponStat weapon;
     public SkinnedMeshRenderer mesh;
     public List<AudioClip> soundsPlayer;
-    public List<Material> playerMat;
 
     [HideInInspector]
     public AudioSource audio;
@@ -50,11 +50,11 @@ public class PlayerController : NetworkBehaviour
         gm.PlayerList.Add(this);
         isDefending = false;
         isAttacking = false;
+        maxHealth = Health;
 
         if(isLocalPlayer)
         {
             PlayerPointEnable();
-            //CmdUpdateMaterial(mesh.gameObject, playerID, helmet);
         }
     }
 
@@ -69,33 +69,10 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    [Command]
-    void CmdUpdateMaterial(GameObject mesh, int id, GameObject helmet)
-    {
-        if(mesh)
-            RpcUpdateMaterial(mesh, id, helmet);
-    }
-
-    [ClientRpc]
-    void RpcUpdateMaterial(GameObject mesh, int id, GameObject helmet)
-    {
-        mesh.GetComponent<SkinnedMeshRenderer>().material = playerMat[id];
-        if (id == 1 || id == 2)
-            helmet.SetActive(true);
-        else
-            helmet.SetActive(false);
-    }
-
     [Client]
     void PlayerPointEnable()
     {
         playerPoint.SetActive(true);
-        //int id = playerID - 1;
-        //mesh.material = playerMat[id];
-        //if (id == 1 || id == 2)
-        //    helmet.SetActive(true);
-        //else
-        //    helmet.SetActive(false);
     }
 
     [Client]
@@ -190,11 +167,10 @@ public class PlayerController : NetworkBehaviour
             CmdAnimate("IsDefending", isDefending, false);
 
             CmdUpdateServer(isAttacking, isDefending, Health);
-
-           
+            
         }
 
-        labelPlayer.text = Health.ToString();
+        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float)Health / (float)maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 

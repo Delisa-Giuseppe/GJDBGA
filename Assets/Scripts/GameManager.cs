@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public static bool startGame;
     public List<GameObject> spawnPoints;
     public List<PlayerController> playerList = new List<PlayerController>();
+    public List<GameObject> healthBar;
+    public List<Material> playerMat;
     private bool isInitialized = false;
     
     private void Start()
@@ -50,7 +52,12 @@ public class GameManager : MonoBehaviour
         {
             int id = playerList.IndexOf(player);
             player.playerID = id + 1;
-            player.labelPlayer.text = "PLAYER " + player.playerID;
+            //player.labelPlayer.text = "PLAYER " + player.playerID;
+            player.mesh.GetComponent<SkinnedMeshRenderer>().material = playerMat[id];
+            if (id == 1 || id == 2)
+                player.helmet.SetActive(true);
+            else
+                player.helmet.SetActive(false);
             player.transform.position = spawnPoints[id].transform.position;
         }
     }
