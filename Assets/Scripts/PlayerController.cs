@@ -166,11 +166,10 @@ public class PlayerController : NetworkBehaviour
             CmdAnimate("IsAttacking", isAttacking, false);
             CmdAnimate("IsDefending", isDefending, false);
 
-            CmdUpdateServer(isAttacking, isDefending, Health);
-            
+            //CmdUpdateServer(isAttacking, isDefending, Health);
         }
 
-        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float)Health / (float)maxHealth;
+        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) Health / (float) maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
