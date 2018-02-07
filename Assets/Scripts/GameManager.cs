@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : MonoBehaviour
 {
     //public string IpAddress;
     //public string Port;
@@ -15,12 +15,10 @@ public class GameManager : NetworkBehaviour
     public List<GameObject> spawnPoints;
     public List<PlayerController> playerList = new List<PlayerController>();
     private bool isInitialized = false;
-    private NetworkManager netM;
     
     private void Start()
     {
         startGame = false;
-        netM = GameObject.FindObjectOfType<NetworkManager>().GetComponent<NetworkManager>();
     }
 
     public List<PlayerController> PlayerList
