@@ -3049,7 +3049,7 @@ Prefab:
     - target: {fileID: 224547103373519086, guid: 73e7865ff25886d4f8045e5a79dd6229,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -1682
       objectReference: {fileID: 0}
     - target: {fileID: 224547103373519086, guid: 73e7865ff25886d4f8045e5a79dd6229,
         type: 2}
@@ -5951,7 +5951,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1421355261164878, guid: 064d3c38d2feb9e47b858805ea9e117b, type: 2}
       propertyPath: m_Name
-      value: George
+      value: Al-Bert
       objectReference: {fileID: 0}
     - target: {fileID: 4494107481638766, guid: 064d3c38d2feb9e47b858805ea9e117b, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -5969,6 +5969,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 137706545034721506, guid: 064d3c38d2feb9e47b858805ea9e117b,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f1eda7aead96b0498d59337a8399deb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 064d3c38d2feb9e47b858805ea9e117b, type: 2}
   m_IsPrefabParent: 0
