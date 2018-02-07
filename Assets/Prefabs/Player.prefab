@@ -2545,6 +2545,9 @@ MonoBehaviour:
   labelPlayer: {fileID: 114238090803618104}
   playerPoint: {fileID: 1372533475712988}
   weaponPosition: {fileID: 4119158637451690}
+  anim: {fileID: 0}
+  weapon: {fileID: 0}
+  playerMovementSpeed: 0.12
 --- !u!114 &114756822793255106
 MonoBehaviour:
   m_ObjectHideFlags: 1

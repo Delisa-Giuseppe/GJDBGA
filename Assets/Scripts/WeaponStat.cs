@@ -37,7 +37,7 @@ public class WeaponStat : MonoBehaviour {
             pc.weapon = this;
             GetComponent<SphereCollider>().enabled = false;
         }
-        else if (pc && pc.playerID != player.playerID)
+        else if (pc && pc.playerID != player.playerID && !pc.isDefending)
         {
             Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
             pc.Health -= player.DamageOutput;
