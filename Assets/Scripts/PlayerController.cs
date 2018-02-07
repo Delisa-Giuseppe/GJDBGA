@@ -19,6 +19,9 @@ public class PlayerController : NetworkBehaviour
     public GameObject playerPoint;
     public Transform weaponPosition;
 
+    [Range (0.1f, 0.15f)]
+    public float playerMovementSpeed;
+
     private PlayerStat ps;
     private LineRenderer lr;
     private Vector3 cursorPosition;
@@ -126,12 +129,12 @@ public class PlayerController : NetworkBehaviour
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Terrain")
+            if (Physics.Raycast(ray, out hit)/* && hit.transform.tag == "Terrain"*/)
             {
                 cursorPosition = hit.point;
                 cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
                 playerDirection = (cursorPosition - transform.position).normalized;
-                GetComponent<Rigidbody>().AddForce(playerDirection * (0.1f + (PlayerSpeed * 0.03f)), ForceMode.VelocityChange);
+                GetComponent<Rigidbody>().AddForce(playerDirection * 0.12f/** (0.1f + (PlayerSpeed * 0.03f))*/, ForceMode.VelocityChange);
                 transform.DOLookAt(cursorPosition, 0.5f);
 
                 lr.SetPosition(0, transform.position);
