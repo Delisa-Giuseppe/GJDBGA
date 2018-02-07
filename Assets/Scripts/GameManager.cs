@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> healthBar;
     public List<Material> playerMat;
     private bool isInitialized = false;
-    
+
     private void Start()
     {
         startGame = false;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update ()
+    void Update()
     {
         if (!isInitialized && playerList.Count == maxPlayer)
         {
@@ -78,10 +78,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+
     void checkVictory()
-    {
-        if(DeathCounter==3)
-        {
+    {  //when contatore 3   
+        if (DeathCounter == 3)
+        {   //check vittoria(controllare player vivo) sommare 1pt al player vivo, check pt player if 3 Vittoria
             foreach (var player in playerList)
             {
                 if (player.isDead == false)
@@ -89,15 +91,30 @@ public class GameManager : MonoBehaviour
 
                 }
             }
+            //altrimenti
+            //contatore 0
+            DeathCounter = 0;
         }
-        
+        else
+        {
+            playerRespawn();
+        }
+
     }
 
-    //when contatore 3   
-    //check vittoria(controllare player vivo) sommare 1pt al player vivo, check pt player if 3 Vittoria
-    //else
-    //contatore 0
-    //respawn player totale (10vit)
-    //bool death false;
-    //allocate to spawnpoint;
+    void playerRespawn()
+    {
+        //respawn player totale (10vit)
+        //bool death false;
+        //allocate to spawnpoint;
+
+        for (int i = 0; i < playerList.Count - 1; i++)
+        {
+            playerList[i].Health = 10;
+            playerList[i].isDead = true;
+            playerList[i].transform.position = spawnPoints[i].transform.position;
+        }
+
+    }
 }
+  
