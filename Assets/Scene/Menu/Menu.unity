@@ -799,7 +799,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4804053687687458, guid: eff012f49342c524185bb564e8fc178e, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1793624283425440, guid: eff012f49342c524185bb564e8fc178e, type: 2}
       propertyPath: m_Name
@@ -3697,7 +3697,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b0bc0fc18f54b794fad812ba2f96ba0c, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b0bc0fc18f54b794fad812ba2f96ba0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3767,7 +3767,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4804053687687458, guid: bb850013de1e0584588638aaed9acb51, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1793624283425440, guid: bb850013de1e0584588638aaed9acb51, type: 2}
       propertyPath: m_Name
