@@ -26,11 +26,8 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector]
     public WeaponStat weapon;
     public SkinnedMeshRenderer mesh;
-    public List<AudioClip> soundsPlayer;
-    public List<Material> playerMat;
 
-    [HideInInspector]
-    public AudioSource audio;
+    public List<Material> playerMat;
 
     [Range (1, 10)]
     public int playerMovementSpeed;
@@ -43,7 +40,6 @@ public class PlayerController : NetworkBehaviour
     
     void Start()
     {
-        audio = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         lr = GetComponent<LineRenderer>();
         gm = FindObjectOfType<GameManager>();
@@ -71,7 +67,6 @@ public class PlayerController : NetworkBehaviour
             {
                 isDead = true;
                 anim.SetTrigger("Death");
-                audio.PlayOneShot(soundsPlayer[1], 1);
                 CmdAnimate("Death", false, false);
                 PlayerPointDisable();
             }
@@ -144,6 +139,42 @@ public class PlayerController : NetworkBehaviour
         Health = health;
     }
 
+    //[ClientRpc]
+    //void RpcDefence()
+    //{
+    //    OnDefence();
+    //}
+    //[Command]
+    //void CmdChangeSkin(int skinIndex, GameObject player)
+    //{
+    //    if (skinIndex == 0)
+    //    {
+    //        skinIndex = 1;
+    //    }
+    //    else if (skinIndex == 1)
+    //    {
+    //        skinIndex = 0;
+    //    }
+
+    //    RpcChangeSkin(skinIndex, player);
+
+    //}
+
+    //[ClientRpc]
+    //void RpcChangeSkin(int skinIndex, GameObject player)
+    //{
+    //    if (skinIndex == 0)
+    //    {
+    //        player.transform.GetChild(1).gameObject.SetActive(false);
+    //        player.transform.GetChild(0).gameObject.SetActive(true);
+    //    }
+    //    else if (skinIndex == 1)
+    //    {
+    //        player.transform.GetChild(0).gameObject.SetActive(false);
+    //        player.transform.GetChild(1).gameObject.SetActive(true);
+    //    }
+    //}
+
     void PlayerMovement ()
     {
         if (isLocalPlayer)
@@ -172,7 +203,6 @@ public class PlayerController : NetworkBehaviour
             if (Input.GetMouseButtonDown(0) && !isDefending && isArmed)//Tasto Sinistro
             {
                 isAttacking = true;
-                audio.PlayOneShot(soundsPlayer[3], 0.5f);
             }
             else
             {
@@ -209,7 +239,6 @@ public class PlayerController : NetworkBehaviour
         {
             shield.SetActive(true);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
-            //audio.PlayOneShot(soundsPlayer[2], 1);
         }
         else
         {

@@ -184,7 +184,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1246376860}
+      - m_Target: {fileID: 2010342800}
         m_MethodName: StartHASClient
         m_Mode: 1
         m_Arguments:
@@ -626,13 +626,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2010342800}
         m_MethodName: SetPlayerOnGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -748,7 +748,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1246376860}
+      - m_Target: {fileID: 2010342800}
         m_MethodName: StartHASHost
         m_Mode: 1
         m_Arguments:
@@ -942,22 +942,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 894216038}
---- !u!1 &1246376859 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1322075226061784, guid: dfa17d87b420dcd4c868d963b6637900,
-    type: 2}
-  m_PrefabInternal: {fileID: 1671244535}
---- !u!114 &1246376860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1246376859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440c5a517ba27ec46a995b25d16ad609, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1252059638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,13 +1267,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2010342800}
         m_MethodName: SetPlayerOnGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1398,94 +1382,15 @@ Prefab:
       propertyPath: m_ServerBindToIP
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114463489818009528, guid: dfa17d87b420dcd4c868d963b6637900,
-        type: 2}
-      propertyPath: m_ServerOnly
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114208239480389652, guid: dfa17d87b420dcd4c868d963b6637900,
-        type: 2}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 1590357570102306, guid: 3e55e506050d31f4b9534cf86367c731,
-        type: 2}
-    m_RemovedComponents:
-    - {fileID: 114199884705645610, guid: dfa17d87b420dcd4c868d963b6637900, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfa17d87b420dcd4c868d963b6637900, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1869738772
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1869738774}
-  - component: {fileID: 1869738773}
-  - component: {fileID: 1869738775}
-  m_Layer: 0
-  m_Name: ConnectionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1869738773
+--- !u!114 &2010342800 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1869738772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440c5a517ba27ec46a995b25d16ad609, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1869738774
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1869738772}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.28970915, y: -2.9472525, z: 1.6540359}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1869738775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1869738772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_PrefabParentObject: {fileID: 114199884705645610, guid: dfa17d87b420dcd4c868d963b6637900,
+    type: 2}
+  m_PrefabInternal: {fileID: 1671244535}
+  m_Script: {fileID: 11500000, guid: 6c7b8cf7bf636c24f874c98834f5c82c, type: 3}
 --- !u!1 &2045133140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,13 +1541,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2010342800}
         m_MethodName: SetPlayerOnGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

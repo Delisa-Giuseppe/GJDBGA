@@ -7,16 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
-    //public string IpAddress;
-    //public string Port;
+    public string IpAddress;
+    public string Port;
 
-    public int maxPlayer = 2;
+    public Canvas nPlayer;
+    public int maxPlayer = 1;
     public static bool startGame;
     public List<GameObject> spawnPoints;
-    public List<PlayerController> playerList = new List<PlayerController>();
-    private bool isInitialized = false;
+    private List<PlayerController> playerList = new List<PlayerController>();
+    private bool isInitialized;
     private NetworkManager netM;
-    
+
     private void Start()
     {
         startGame = false;
@@ -36,14 +37,13 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    void Update ()
-    {
-        if (!isInitialized && playerList.Count == maxPlayer)
+    void Update () {
+		if(!isInitialized && playerList.Count == maxPlayer)
         {
             InitializePlayer();
             startGame = true;
         }
-    }
+	}
 
     private void InitializePlayer()
     {
@@ -55,5 +55,22 @@ public class GameManager : NetworkBehaviour
             player.labelPlayer.text = "PLAYER " + player.playerID;
             player.transform.position = spawnPoints[id].transform.position;
         }
+    }
+
+    public void SetPlayerOnGame (int nPlayers)
+    {
+        maxPlayer = nPlayers;
+    }
+
+    public void StartHASHost()
+    {
+        GetComponent<NetworkManager>().StartHost(null, maxPlayer);
+    }
+
+    public void StartHASClient()
+    {
+        GetComponent<NetworkManager>().networkAddress = ("192.168.65.70");
+        GetComponent<NetworkManager>().networkPort = 7777;
+        GetComponent<NetworkManager>().StartClient();
     }
 }
