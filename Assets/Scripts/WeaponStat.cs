@@ -33,9 +33,9 @@ public class WeaponStat : MonoBehaviour {
         else if (pc && pc.playerID != player.playerID && !pc.isDefending)
         {
             pc.anim.SetTrigger("TakeDamage");
-            pc.CmdAnimate("TakeDamage", false, false);
+            //pc.CmdAnimate("TakeDamage", false, false);
             pc.Health -= player.DamageOutput;
-            pc.CmdUpdateServer(pc.isAttacking, pc.isDefending, pc.Health);
+            //pc.CmdUpdateServer(pc.isAttacking, pc.isDefending, pc.Health);
             pc.labelPlayer.text = " HEALTH : " + pc.Health;
         }
     }

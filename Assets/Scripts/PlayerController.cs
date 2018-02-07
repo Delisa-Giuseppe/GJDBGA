@@ -67,7 +67,7 @@ public class PlayerController : NetworkBehaviour
             {
                 isDead = true;
                 anim.SetTrigger("Death");
-                CmdAnimate("Death", false, false);
+                //CmdAnimate("Death", false, false);
                 PlayerPointDisable();
             }
         }
