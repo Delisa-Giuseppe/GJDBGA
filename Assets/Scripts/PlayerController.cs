@@ -8,8 +8,19 @@ using UnityEngine.UI;
 public class PlayerController : NetworkBehaviour
 {
     [SyncVar] public int playerID;
+    [SyncVar] public int Health;
+    [SyncVar] public int DamageOutput;
+    [SyncVar] public int Defence;
+    [SyncVar] public float PlayerSpeed;
+    [SyncVar] public bool isDefending;
+    [SyncVar] public bool isAttacking;
+    [SyncVar] public bool isArmed;
     public Text labelPlayer;
     public GameObject playerPoint;
+    public Transform weaponPosition;
+
+    [Range (0.1f, 0.15f)]
+    public float playerMovementSpeed;
 
     private PlayerStat ps;
     private LineRenderer lr;
@@ -18,8 +29,7 @@ public class PlayerController : NetworkBehaviour
     private GameManager gm;
     private Animator anim;
     private bool start;
-    [SyncVar] private bool isDefending;
-
+    
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -70,8 +80,8 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer)
             return;
 
-        ps.OnDefence();
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+        ps.OnDefence();
 
         if (!start)
         {
@@ -119,39 +129,40 @@ public class PlayerController : NetworkBehaviour
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Terrain")
+            if (Physics.Raycast(ray, out hit)/* && hit.transform.tag == "Terrain"*/)
             {
                 cursorPosition = hit.point;
                 cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
                 playerDirection = (cursorPosition - transform.position).normalized;
-                GetComponent<Rigidbody>().AddForce(playerDirection * (0.1f + (ps.PlayerSpeed * 0.03f)), ForceMode.VelocityChange);
+                GetComponent<Rigidbody>().AddForce(playerDirection * 0.12f/** (0.1f + (PlayerSpeed * 0.03f))*/, ForceMode.VelocityChange);
                 transform.DOLookAt(cursorPosition, 0.5f);
 
                 lr.SetPosition(0, transform.position);
                 lr.SetPosition(1, cursorPosition);
             }
 
-            if (Input.GetMouseButtonDown(0) && !IsDefending)//Tast Destro
+            if (Input.GetMouseButtonDown(0) && !IsDefending && isArmed)//Tast Destro
             {
-                ps.IsAttacking = true;
+                isAttacking = true;
                 Debug.Log("Attacco");
             }
-            if (Input.GetMouseButtonUp(0))
+            else
             {
-                ps.IsAttacking = false;
+                isAttacking = false;
             }
-            if (Input.GetMouseButtonDown(1) && !ps.IsAttacking)//Tasto Sinistro
+
+            if (Input.GetMouseButton(1) && !ps.IsAttacking)//Tasto Sinistro
             {
                 IsDefending = true;
                 Debug.Log("Difeso");
             }
-            if (Input.GetMouseButtonUp(1))//Tasto Sinistro
+            else
             {
                 IsDefending = false;
             }
 
-            ps.OnDefence();
             labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+            ps.OnDefence();
 
             if (!start)
             {
@@ -159,7 +170,12 @@ public class PlayerController : NetworkBehaviour
                 start = true;
             }
         }
+        else
+        {
+            return;
+        }
 
+        ps.OnDefence();
         CmdUpdate();
     }
 
