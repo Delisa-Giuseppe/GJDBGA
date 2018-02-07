@@ -183,7 +183,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 75429883}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2010342800}
+        m_MethodName: StartHASClient
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &75429883
@@ -737,7 +748,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1544290222}
+      - m_Target: {fileID: 2010342800}
         m_MethodName: StartHASHost
         m_Mode: 1
         m_Arguments:
@@ -1106,12 +1117,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1544290222 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114049154334867914, guid: dfa17d87b420dcd4c868d963b6637900,
-    type: 2}
-  m_PrefabInternal: {fileID: 1671244535}
-  m_Script: {fileID: 11500000, guid: 08713a8652c0f274aae326fae2911fdc, type: 3}
 --- !u!1 &1642006738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,6 +1370,16 @@ Prefab:
     - target: {fileID: 114963576778413782, guid: dfa17d87b420dcd4c868d963b6637900,
         type: 2}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114208239480389652, guid: dfa17d87b420dcd4c868d963b6637900,
+        type: 2}
+      propertyPath: m_NetworkAddress
+      value: 192.168.65.70
+      objectReference: {fileID: 0}
+    - target: {fileID: 114208239480389652, guid: dfa17d87b420dcd4c868d963b6637900,
+        type: 2}
+      propertyPath: m_ServerBindToIP
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
