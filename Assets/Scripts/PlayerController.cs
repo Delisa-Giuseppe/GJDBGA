@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public int DamageOutput;
     [SyncVar] public int Defence;
     [SyncVar] public float PlayerSpeed;
-    [SyncVar] public bool isDefending;
+    [SyncVar(hook = "OnDefence")] public bool isDefending;
     [SyncVar] public bool isAttacking;
     [SyncVar] public bool isArmed;
     public Text labelPlayer;
@@ -31,7 +32,6 @@ public class PlayerController : NetworkBehaviour
     private Vector3 cursorPosition;
     private Vector3 playerDirection;
     private GameManager gm;
-    private bool start;
     private bool isDead;
     
     void Start()
@@ -40,8 +40,8 @@ public class PlayerController : NetworkBehaviour
         lr = GetComponent<LineRenderer>();
         gm = FindObjectOfType<GameManager>();
         gm.PlayerList.Add(this);
-        start = false;
-        IsDefending = false;
+        isDefending = false;
+        isAttacking = false;
 
         if(isLocalPlayer)
             PlayerPointEnable();
@@ -60,13 +60,10 @@ public class PlayerController : NetworkBehaviour
             {
                 isDead = true;
                 anim.SetTrigger("Death");
+                CmdAnimate("Death", false, false);
                 PlayerPointDisable();
             }
         }
-        //if (Input.GetKeyDown(KeyCode.Return))
-        //{
-        //    CmdChangeSkin(skinIndex, gameObject);
-        //}
     }
 
     [Client]
@@ -82,40 +79,42 @@ public class PlayerController : NetworkBehaviour
     }
 
     [Command]
-    void CmdUpdate()
+    public void CmdAnimate(string name, bool value, bool trigger)
     {
-        RpcUpdateClient();
+        RpcAnimate(name, value, trigger);
     }
 
     [ClientRpc]
-    void RpcUpdateClient()
+    void RpcAnimate(string name, bool value, bool trigger)
     {
-        if (isLocalPlayer)
-            return;
-
-        labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
-
-        if (!start)
+        if(anim)
         {
-            anim.SetTrigger("StartGame");
-            start = true;
+            if (!trigger)
+                anim.SetBool(name, value);
+            else
+                anim.SetTrigger(name);
         }
     }
-    
+
     [Command]
-    public void CmdDefence()
+    public void CmdUpdateServer(bool fight, bool defence, int health)
     {
-        if (IsDefending)
-        {
-            shield.SetActive(true);
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-        else
-        {
-            shield.SetActive(false);
-        }
+        RpcUpdateServer(fight, defence, health);
     }
 
+    [ClientRpc]
+    private void RpcUpdateServer(bool fight, bool defence, int health)
+    {
+        isAttacking = fight;
+        isDefending = defence;
+        Health = health;
+    }
+
+    //[ClientRpc]
+    //void RpcDefence()
+    //{
+    //    OnDefence();
+    //}
     //[Command]
     //void CmdChangeSkin(int skinIndex, GameObject player)
     //{
@@ -163,7 +162,8 @@ public class PlayerController : NetworkBehaviour
                 if (Vector3.Distance(cursorPosition, transform.position) > 1)
                 {
                     transform.DOLookAt(cursorPosition, 0.5f);
-                    GetComponent<Rigidbody>().velocity = playerDirection * playerMovementSpeed;
+                    if(!isDefending)
+                        GetComponent<Rigidbody>().velocity = playerDirection * playerMovementSpeed;
                 }
 
                 cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
@@ -171,45 +171,50 @@ public class PlayerController : NetworkBehaviour
                 lr.SetPosition(1, cursorPosition);
             }
 
-            if (Input.GetMouseButtonDown(0) && !IsDefending && isArmed)//Tast Destro
+            if (Input.GetMouseButtonDown(0) && !isDefending && isArmed)//Tasto Sinistro
             {
                 isAttacking = true;
-                Debug.Log("Attacco");
             }
             else
             {
                 isAttacking = false;
             }
 
-            if (Input.GetMouseButton(1) && !isAttacking)//Tasto Sinistro
+            if (Input.GetMouseButton(1) && !isAttacking)//Tast Destro
             {
-                IsDefending = true;
-                Debug.Log("Difeso");
+                isDefending = true;
             }
             else
             {
-                IsDefending = false;
+                isDefending = false;
             }
 
-            labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
-            CmdDefence();
-
-            if (!start)
-            {
-                anim.SetTrigger("StartGame");
-                start = true;
-            }
+            anim.SetTrigger("StartGame");
+            CmdAnimate("StartGame", false, true);
 
             anim.SetBool("IsAttacking", isAttacking);
-            anim.SetBool("IsDefending", IsDefending);
+            anim.SetBool("IsDefending", isDefending);
+
+            CmdAnimate("IsAttacking", isAttacking, false);
+            CmdAnimate("IsDefending", isDefending, false);
+
+            CmdUpdateServer(isAttacking, isDefending, Health);
+        }
+
+        labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
+    }
+
+    public void OnDefence(bool defence)
+    {
+        if (defence)
+        {
+            shield.SetActive(true);
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
         else
         {
-            return;
+            shield.SetActive(false);
         }
-
-        CmdDefence();
-        CmdUpdate();
     }
 
     public void InitAttack()
@@ -220,18 +225,5 @@ public class PlayerController : NetworkBehaviour
     public void EndAttack()
     {
         weapon.GetComponent<SphereCollider>().enabled = false;
-    }
-
-    public bool IsDefending
-    {
-        get
-        {
-            return isDefending;
-        }
-
-        set
-        {
-            isDefending = value;
-        }
     }
 }
