@@ -234,7 +234,6 @@ GameObject:
   - component: {fileID: 4010427876382720}
   - component: {fileID: 95088939754433120}
   - component: {fileID: 114283990201167784}
-  - component: {fileID: 114991953476777320}
   - component: {fileID: 114648136733079660}
   - component: {fileID: 114546272286183158}
   - component: {fileID: 54544071475352034}
@@ -899,7 +898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1825059395329844
 GameObject:
   m_ObjectHideFlags: 1
@@ -1169,7 +1168,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230423389573702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6257315, y: -3.22, z: 4.2125254}
+  m_LocalPosition: {x: -2.4506447, y: -3.2722304, z: -10.690452}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4725627239472218}
@@ -2545,9 +2544,10 @@ MonoBehaviour:
   labelPlayer: {fileID: 114238090803618104}
   playerPoint: {fileID: 1372533475712988}
   weaponPosition: {fileID: 4119158637451690}
+  shield: {fileID: 1820607700311378}
   anim: {fileID: 0}
   weapon: {fileID: 0}
-  playerMovementSpeed: 0.12
+  playerMovementSpeed: 2
 --- !u!114 &114756822793255106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2580,22 +2580,6 @@ MonoBehaviour:
     i15: 154
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114991953476777320
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1230423389573702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a836e90f9e8b6bb4488c27f028513cbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAttacking: 0
-  isArmed: 0
-  isReady: 0
-  ShieldRenderer: {fileID: 23920233878123186}
-  ShieldCollider: {fileID: 65263067793383364}
 --- !u!120 &120835334824468700
 LineRenderer:
   m_ObjectHideFlags: 1

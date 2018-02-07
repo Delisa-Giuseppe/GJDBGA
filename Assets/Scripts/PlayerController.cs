@@ -18,15 +18,15 @@ public class PlayerController : NetworkBehaviour
     public Text labelPlayer;
     public GameObject playerPoint;
     public Transform weaponPosition;
+    public GameObject shield;
     [HideInInspector]
     public Animator anim;
     [HideInInspector]
     public WeaponStat weapon;
 
-    [Range (0.1f, 0.15f)]
-    public float playerMovementSpeed;
+    [Range (1, 10)]
+    public int playerMovementSpeed;
 
-    private PlayerStat ps;
     private LineRenderer lr;
     private Vector3 cursorPosition;
     private Vector3 playerDirection;
@@ -36,7 +36,6 @@ public class PlayerController : NetworkBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        ps = GetComponent<PlayerStat>();
         lr = GetComponent<LineRenderer>();
         gm = FindObjectOfType<GameManager>();
         gm.PlayerList.Add(this);
@@ -84,12 +83,26 @@ public class PlayerController : NetworkBehaviour
             return;
 
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
-        ps.OnDefence();
+        OnDefence();
 
         if (!start)
         {
             anim.SetTrigger("StartGame");
             start = true;
+        }
+    }
+
+    public void OnDefence()
+    {
+        if (IsDefending)
+        {
+            shield.SetActive(true);
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        else
+        {
+            shield.SetActive(false);
+            //this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 
@@ -140,7 +153,7 @@ public class PlayerController : NetworkBehaviour
                 if (Vector3.Distance(cursorPosition, transform.position) > 1)
                 {
                     transform.DOLookAt(cursorPosition, 0.5f);
-                    GetComponent<Rigidbody>().AddForce(playerDirection * playerMovementSpeed, ForceMode.VelocityChange);
+                    GetComponent<Rigidbody>().velocity = playerDirection * playerMovementSpeed;
                 }
 
                 cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
@@ -158,7 +171,7 @@ public class PlayerController : NetworkBehaviour
                 isAttacking = false;
             }
 
-            if (Input.GetMouseButton(1) && !ps.IsAttacking)//Tasto Sinistro
+            if (Input.GetMouseButton(1) && !isAttacking)//Tasto Sinistro
             {
                 IsDefending = true;
                 Debug.Log("Difeso");
@@ -169,7 +182,7 @@ public class PlayerController : NetworkBehaviour
             }
 
             labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
-            ps.OnDefence();
+            OnDefence();
 
             if (!start)
             {
@@ -185,7 +198,7 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
-        ps.OnDefence();
+        OnDefence();
         CmdUpdate();
     }
 

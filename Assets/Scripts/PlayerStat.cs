@@ -31,7 +31,7 @@ public class PlayerStat : MonoBehaviour
         IsAttacking = false;
         isArmed = false;
         isAlive = true;
-        OnDefence();
+        //OnDefence();
     }
 
     // Update is called once per frame
@@ -56,21 +56,7 @@ public class PlayerStat : MonoBehaviour
 
     }
 
-    public void OnDefence()
-    {
-        if (pc.IsDefending)
-        {
-            ShieldCollider.enabled = true;
-            ShieldRenderer.enabled = true;
-            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        }
-        else
-        {
-            ShieldCollider.enabled = false;
-            ShieldRenderer.enabled = false;
-            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-        }
-    }
+    
 
     public bool IsAttacking
     {
