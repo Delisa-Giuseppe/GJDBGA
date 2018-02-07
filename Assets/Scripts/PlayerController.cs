@@ -132,11 +132,15 @@ public class PlayerController : NetworkBehaviour
             if (Physics.Raycast(ray, out hit)/* && hit.transform.tag == "Terrain"*/)
             {
                 cursorPosition = hit.point;
-                cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
+                cursorPosition.y = transform.position.y;
                 playerDirection = (cursorPosition - transform.position).normalized;
-                GetComponent<Rigidbody>().AddForce(playerDirection * 0.12f/** (0.1f + (PlayerSpeed * 0.03f))*/, ForceMode.VelocityChange);
-                transform.DOLookAt(cursorPosition, 0.5f);
+                if (Vector3.Distance(cursorPosition, transform.position) > 1)
+                {
+                    transform.DOLookAt(cursorPosition, 0.5f);
+                    GetComponent<Rigidbody>().AddForce(playerDirection * playerMovementSpeed, ForceMode.VelocityChange);
+                }
 
+                cursorPosition.y += GetComponent<CapsuleCollider>().height / 2;
                 lr.SetPosition(0, transform.position);
                 lr.SetPosition(1, cursorPosition);
             }
