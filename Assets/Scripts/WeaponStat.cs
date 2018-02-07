@@ -10,15 +10,8 @@ public class WeaponStat : MonoBehaviour {
     public float PlayerSpeed;
     public PlayerController player;
 
-    bool hit;
-
     void Start () {
         player = null;
-	}
-	
-	
-    void Update () {
-		
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -35,13 +28,14 @@ public class WeaponStat : MonoBehaviour {
             transform.position = pc.weaponPosition.position;
             pc.isArmed = true;
             pc.weapon = this;
-            GetComponent<SphereCollider>().enabled = false;
+            GetComponent<MeshCollider>().enabled = false;
         }
         else if (pc && pc.playerID != player.playerID && !pc.isDefending)
         {
-            Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
             pc.anim.SetTrigger("TakeDamage");
+            pc.CmdAnimate("TakeDamage", false, false);
             pc.Health -= player.DamageOutput;
+            pc.CmdUpdateServer(pc.isAttacking, pc.isDefending, pc.Health);
             pc.labelPlayer.text = " HEALTH : " + pc.Health;
         }
     }
