@@ -2548,7 +2548,7 @@ MonoBehaviour:
   shield: {fileID: 1820607700311378}
   anim: {fileID: 0}
   weapon: {fileID: 0}
-  playerMovementSpeed: 2
+  playerMovementSpeed: 6
 --- !u!114 &114756822793255106
 MonoBehaviour:
   m_ObjectHideFlags: 1
