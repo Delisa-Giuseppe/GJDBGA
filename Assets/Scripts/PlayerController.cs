@@ -222,8 +222,9 @@ public class PlayerController : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Magma" && !this.isDead)
+        if (other.gameObject.tag == "Magma" && !this.isDead && this.Health > 0)
         {
+            print("MAGMA");
             this.Health = 0;
             this.isDead = true;
             this.audio.PlayOneShot(soundsPlayer[1], 1);
