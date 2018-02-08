@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public List<PlayerController> playerList = new List<PlayerController>();
     public List<GameObject> healthBar;
     public List<Material> playerMat;
+    public Animator countdown;
     private bool isInitialized = false;
 
     private void Start()
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         if (!isInitialized && playerList.Count == maxPlayer)
         {
             InitializePlayer();
+            countdown.SetTrigger("Start");
         }
     }
 
