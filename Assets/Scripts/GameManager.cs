@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
                     if (player.gamePoints >= 3)
                     {
                         playerWins(player.playerID);
+                        return;
                     }
                 }
 

@@ -222,7 +222,7 @@ public class PlayerController : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Magma")
+        if (other.gameObject.tag == "Magma" && !this.isDead)
         {
             this.Health = 0;
             this.isDead = true;
