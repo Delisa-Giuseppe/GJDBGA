@@ -540,6 +540,16 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114052568931472510, guid: b9bb76abe744d9947b7b04112abd0792,
+        type: 2}
+      propertyPath: m_LocalPlayerAuthority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114606364743314356, guid: b9bb76abe744d9947b7b04112abd0792,
+        type: 2}
+      propertyPath: m_ParameterSendBits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9bb76abe744d9947b7b04112abd0792, type: 2}
   m_IsPrefabParent: 0
