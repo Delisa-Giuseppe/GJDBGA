@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         startGame = false;
-        //maxPlayer = GameObject.Find(Ne)
     }
 
     public List<PlayerController> PlayerList
@@ -61,14 +60,16 @@ public class GameManager : MonoBehaviour
             if (id == 1 || id == 2)
                 player.helmet.SetActive(true);
             else
+            {
                 player.helmet.SetActive(false);
-            player.transform.position = spawnPoints[id].transform.position;
+                player.transform.position = spawnPoints[id].transform.position; 
+            }
         }
     }
 
     public void checkVictory()
     {
-        if (matchDeathCounter == 3)
+        if (matchDeathCounter == maxPlayer-1)
         {
             foreach (var player in playerList)
             {

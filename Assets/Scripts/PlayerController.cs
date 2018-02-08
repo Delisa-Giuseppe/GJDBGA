@@ -219,4 +219,12 @@ public class PlayerController : NetworkBehaviour
             gm.checkVictory();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Magma")
+        {
+            TakeDamage(this.gameObject.GetComponent<PlayerController>(), 100);
+        }
+    }
 }
