@@ -13,6 +13,6 @@ public class Countdown : MonoBehaviour {
             a.Play();
         }
         GameManager.startGame = true;
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }

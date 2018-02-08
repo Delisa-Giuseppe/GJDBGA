@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 223899664362333076}
   - component: {fileID: 114381886707132308}
   - component: {fileID: 114661680365338508}
-  - component: {fileID: 212440068833781888}
+  - component: {fileID: 212694549516006870}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1308,7 +1308,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!212 &212440068833781888
+--- !u!212 &212694549516006870
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
