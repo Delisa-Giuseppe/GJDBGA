@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
+                this.GetComponent<CapsuleCollider>().enabled = true;
                 player.GetComponent<Animator>().SetTrigger("Respawn");
                 player.transform.position = spawnPoints[player.playerID - 1].transform.position;
                 player.maxHealth = 10;
