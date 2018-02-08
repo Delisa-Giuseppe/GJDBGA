@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public int maxPlayer = 2;
     public static bool startGame;
+    public static int winnerID;
     public List<GameObject> spawnPoints;
     public List<PlayerController> playerList = new List<PlayerController>();
     public List<GameObject> healthBar;
@@ -95,16 +96,16 @@ public class GameManager : MonoBehaviour
 
                     if (player.gamePoints >= 3)
                     {
-                        playerWins(player.playerID);
+                        winnerID = player.playerID;
+                        playerWins();
                         return;
                     }
                 }
 
-                player.Health = 10;
-                player.isDead = false;
                 player.GetComponent<Animator>().SetTrigger("Respawn");
                 player.transform.position = spawnPoints[player.playerID - 1].transform.position;
-                
+                player.Health = 10;
+                player.isDead = false;
             }
             
             matchDeathCounter = 0;
@@ -114,7 +115,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void playerWins(int playerID)
+    public void playerWins()
     {
         //SceneManager.LoadScene("Assets/Scene/Menu/Vittoria.unity");
         FindObjectOfType<NetworkManager>().ServerChangeScene("Vittoria");
