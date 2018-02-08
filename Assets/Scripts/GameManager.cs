@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour
                 if (player.isDead == false)
                 {
                     player.gamePoints += 1;
+
+                    print("POINTS " + player.gamePoints);
+
                     for (int i = 0; i < player.gamePoints; i++)
                     {
                         scorePoint[player.playerID - 1].transform.GetChild(i).GetComponent<Image>().color = new Color(0, 255, 0);
@@ -107,7 +110,7 @@ public class GameManager : MonoBehaviour
             matchDeathCounter = 0;
             startGame = false;
             countdown.gameObject.SetActive(true);
-            countdown.Play("Cooldown", -1, 0f);
+            countdown.SetTrigger("Start");
         }
     }
 
