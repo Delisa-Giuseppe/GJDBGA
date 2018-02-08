@@ -69,4 +69,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e7b785d700e09d543a8218928090f3c8, type: 2}
   - {fileID: 2100000, guid: d0c7f9966375b3d4cb271d364f529a79, type: 2}
   countdown: {fileID: 0}
-  DeathCounter: 0
+  matchDeathCounter: 0
