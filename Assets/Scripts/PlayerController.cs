@@ -20,8 +20,8 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public int maxHealth;
     public Text labelPlayer;
     public GameObject playerPoint;
-    public Transform weaponPosition;
-    public GameObject shield;
+    [SyncVar] public Transform weaponPosition;
+    [SyncVar] public GameObject shield;
     public GameObject helmet;
     [HideInInspector]
     public Animator anim;
@@ -142,7 +142,7 @@ public class PlayerController : NetworkBehaviour
             if (Input.GetMouseButtonDown(0) && !isDefending && isArmed)//Tasto Sinistro
             {
                 isAttacking = true;
-                audio.PlayOneShot(soundsPlayer[3], 0.5f);
+                audio.PlayOneShot(soundsPlayer[3], 1);
             }
             else
             {
@@ -158,10 +158,10 @@ public class PlayerController : NetworkBehaviour
                 isDefending = false;
             }
 
-            anim.SetTrigger("StartGame");
+            //anim.SetTrigger("StartGame");
 
-            anim.SetBool("IsAttacking", isAttacking);
-            anim.SetBool("IsDefending", isDefending);
+            //anim.SetBool("IsAttacking", isAttacking);
+            //anim.SetBool("IsDefending", isDefending);
 
         }
 
@@ -170,7 +170,7 @@ public class PlayerController : NetworkBehaviour
         CmdAnimate("IsAttacking", isAttacking, false);
         CmdAnimate("IsDefending", isDefending, false);
 
-        CmdUpdateServer(isAttacking, isDefending, Health);
+        //CmdUpdateServer(isAttacking, isDefending, Health);
         gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) Health / (float) maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
@@ -199,7 +199,6 @@ public class PlayerController : NetworkBehaviour
         weapon.gameObject.GetComponent<MeshCollider>().enabled = false;
     }
 
-    [Server]
     public void TakeDamage(PlayerController pc, int damage)
     {
         int id = pc.playerID - 1;
@@ -210,7 +209,7 @@ public class PlayerController : NetworkBehaviour
         {
             gm.playerList[id].isDead = true;
             gm.playerList[id].Health = 0;
-            gm.playerList[id].anim.SetTrigger("Death");
+            //gm.playerList[id].anim.SetTrigger("Death");
             gm.playerList[id].audio.PlayOneShot(soundsPlayer[1], 1);
             gm.playerList[id].CmdAnimate("Death", false, false);
             gm.playerList[id].PlayerPointDisable();
