@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                         scorePoint[player.playerID - 1].transform.GetChild(i).GetComponent<Image>().color = new Color(0, 255, 0);
                     }
 
-                    if (player.gamePoints >= 3)
+                    if (player.gamePoints >= 2)
                     {
                         winnerID = player.playerID;
                         playerWins();

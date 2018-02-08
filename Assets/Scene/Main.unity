@@ -113,75 +113,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1773875608856922, guid: b9bb76abe744d9947b7b04112abd0792,
     type: 2}
   m_PrefabInternal: {fileID: 636029113}
---- !u!114 &26159734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 26159733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 185
-    i1: 187
-    i2: 118
-    i3: 171
-    i4: 231
-    i5: 68
-    i6: 217
-    i7: 148
-    i8: 123
-    i9: 123
-    i10: 4
-    i11: 17
-    i12: 42
-    i13: 189
-    i14: 7
-    i15: 146
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!1 &36180422 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1813383139438198, guid: b9bb76abe744d9947b7b04112abd0792,
     type: 2}
   m_PrefabInternal: {fileID: 636029113}
---- !u!114 &36180423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 36180422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 185
-    i1: 187
-    i2: 118
-    i3: 171
-    i4: 231
-    i5: 68
-    i6: 217
-    i7: 148
-    i8: 123
-    i9: 123
-    i10: 4
-    i11: 17
-    i12: 42
-    i13: 189
-    i14: 7
-    i15: 146
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!1 &496262874
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,16 +540,6 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114052568931472510, guid: b9bb76abe744d9947b7b04112abd0792,
-        type: 2}
-      propertyPath: m_LocalPlayerAuthority
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114606364743314356, guid: b9bb76abe744d9947b7b04112abd0792,
-        type: 2}
-      propertyPath: m_ParameterSendBits
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9bb76abe744d9947b7b04112abd0792, type: 2}
   m_IsPrefabParent: 0
@@ -729,38 +655,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1823228333994752, guid: b9bb76abe744d9947b7b04112abd0792,
     type: 2}
   m_PrefabInternal: {fileID: 636029113}
---- !u!114 &1019240865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1019240864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 185
-    i1: 187
-    i2: 118
-    i3: 171
-    i4: 231
-    i5: 68
-    i6: 217
-    i7: 148
-    i8: 123
-    i9: 123
-    i10: 4
-    i11: 17
-    i12: 42
-    i13: 189
-    i14: 7
-    i15: 146
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!1 &1028866290 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1760134114181986, guid: 79144d40939439549a07fc7ebaaffe50,
@@ -1102,35 +996,3 @@ GameObject:
   m_PrefabParentObject: {fileID: 1440387605771078, guid: b9bb76abe744d9947b7b04112abd0792,
     type: 2}
   m_PrefabInternal: {fileID: 636029113}
---- !u!114 &2117656818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2117656817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 185
-    i1: 187
-    i2: 118
-    i3: 171
-    i4: 231
-    i5: 68
-    i6: 217
-    i7: 148
-    i8: 123
-    i9: 123
-    i10: 4
-    i11: 17
-    i12: 42
-    i13: 189
-    i14: 7
-    i15: 146
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
