@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public Animator countdown;
     private bool isInitialized = false;
 
+    public GameObject waitingText;
+
     public int matchDeathCounter = 0;
 
     private void Start()
@@ -48,11 +50,16 @@ public class GameManager : MonoBehaviour
             InitializePlayer();
             countdown.SetTrigger("Start");
         }
+        else if (!isInitialized && playerList.Count < maxPlayer)
+        {
+            waitingText.SetActive(true);
+        }
     }
 
     private void InitializePlayer()
     {
         isInitialized = true;
+        waitingText.SetActive(false);
         foreach (var player in playerList)
         {
             int id = playerList.IndexOf(player);
