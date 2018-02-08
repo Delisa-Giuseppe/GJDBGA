@@ -101,17 +101,15 @@ public class PlayerController : NetworkBehaviour
     }
 
     [Command]
-    public void CmdUpdateServer(bool fight, bool defence, int health)
+    public void CmdUpdateServer(bool defence)
     {
-        RpcUpdateServer(fight, defence, health);
+        RpcUpdateServer(defence);
     }
 
     [ClientRpc]
-    private void RpcUpdateServer(bool fight, bool defence, int health)
+    private void RpcUpdateServer(bool defence)
     {
-        isAttacking = fight;
         isDefending = defence;
-        Health = health;
     }
 
     void PlayerMovement ()
@@ -160,8 +158,8 @@ public class PlayerController : NetworkBehaviour
 
             //anim.SetTrigger("StartGame");
 
-            anim.SetBool("IsAttacking", isAttacking);
-            anim.SetBool("IsDefending", isDefending);
+            //anim.SetBool("IsAttacking", isAttacking);
+            //anim.SetBool("IsDefending", isDefending);
 
         }
 
@@ -172,7 +170,7 @@ public class PlayerController : NetworkBehaviour
         CmdAnimate("IsAttacking", isAttacking, false);
         CmdAnimate("IsDefending", isDefending, false);
 
-        //CmdUpdateServer(isAttacking, isDefending, Health);
+        CmdUpdateServer(isDefending);
         gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float)gm.playerList[playerID - 1].Health / (float)gm.playerList[playerID - 1].maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
