@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
                 player.maxHealth = 10;
                 player.Health = 10;
                 player.isDead = false;
+                player.hitMagma = false;
             }
             
             matchDeathCounter = 0;

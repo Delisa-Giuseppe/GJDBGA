@@ -218,11 +218,20 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    public bool hitMagma;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Magma" && !this.isDead && this.Health > 0)
+        if (other.gameObject.tag == "Magma" && !this.isDead && this.Health > 0 && !hitMagma)
         {
-            CmdMagma();
+            print("MAGMA");
+            this.hitMagma = true;
+            this.Health = 0;
+            this.isDead = true;
+            this.audio.PlayOneShot(soundsPlayer[1], 1);
+            this.CmdAnimate("Death", false, true);
+            this.PlayerPointDisable();
+            gm.matchDeathCounter++;
+            gm.checkVictory();
         }
     }
 
@@ -235,13 +244,6 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void RpcMagma()
     {
-        print("MAGMA");
-        this.Health = 0;
-        this.isDead = true;
-        this.audio.PlayOneShot(soundsPlayer[1], 1);
-        this.CmdAnimate("Death", false, true);
-        this.PlayerPointDisable();
-        gm.matchDeathCounter++;
-        gm.checkVictory();
+        
     }
 }
