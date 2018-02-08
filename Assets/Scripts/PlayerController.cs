@@ -17,7 +17,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public bool isAttacking;
     [SyncVar] public bool isArmed;
     [SyncVar] public int gamePoints = 0;
-    public int maxHealth;
+    [SyncVar] public int maxHealth;
     public Text labelPlayer;
     public GameObject playerPoint;
     public Transform weaponPosition;
@@ -159,17 +159,18 @@ public class PlayerController : NetworkBehaviour
             }
 
             anim.SetTrigger("StartGame");
-            CmdAnimate("StartGame", false, true);
 
             anim.SetBool("IsAttacking", isAttacking);
             anim.SetBool("IsDefending", isDefending);
 
-            CmdAnimate("IsAttacking", isAttacking, false);
-            CmdAnimate("IsDefending", isDefending, false);
-
-            //CmdUpdateServer(isAttacking, isDefending, Health);
         }
 
+        CmdAnimate("StartGame", false, true);
+
+        CmdAnimate("IsAttacking", isAttacking, false);
+        CmdAnimate("IsDefending", isDefending, false);
+
+        CmdUpdateServer(isAttacking, isDefending, Health);
         gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) Health / (float) maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
@@ -198,6 +199,7 @@ public class PlayerController : NetworkBehaviour
         weapon.gameObject.GetComponent<MeshCollider>().enabled = false;
     }
 
+    [Server]
     public void TakeDamage(PlayerController pc, int damage)
     {
         int id = pc.playerID - 1;
