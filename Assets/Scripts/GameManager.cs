@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> spawnPoints;
     public List<PlayerController> playerList = new List<PlayerController>();
     public List<GameObject> healthBar;
+    public List<GameObject> scorePoint;
     public List<Material> playerMat;
     public Animator countdown;
     private bool isInitialized = false;
@@ -76,6 +78,10 @@ public class GameManager : MonoBehaviour
                 if (player.isDead == false)
                 {
                     player.gamePoints += 1;
+                    for (int i = 0; i < player.gamePoints; i++)
+                    {
+                        scorePoint[player.playerID - 1].transform.GetChild(i).GetComponent<Image>().color = new Color(0, 255, 0);
+                    }
 
                     if (player.gamePoints >= 3)
                     {
@@ -85,16 +91,21 @@ public class GameManager : MonoBehaviour
 
                 player.Health = 10;
                 player.isDead = false;
+                player.GetComponent<Animator>().SetTrigger("Respawn");
                 player.transform.position = spawnPoints[player.playerID - 1].transform.position;
+                
             }
-
+            
             matchDeathCounter = 0;
+            startGame = false;
+            countdown.gameObject.SetActive(true);
         }
     }
 
     public void playerWins(int playerID)
     {
-        SceneManager.LoadScene("Assets/Scene/Menu/Vittoria.unity");
+        //SceneManager.LoadScene("Assets/Scene/Menu/Vittoria.unity");
+        FindObjectOfType<NetworkManager>().ServerChangeScene("Vittoria");
     }
 }
   

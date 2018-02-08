@@ -108,6 +108,16 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &26159733 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1773875608856922, guid: b9bb76abe744d9947b7b04112abd0792,
+    type: 2}
+  m_PrefabInternal: {fileID: 636029113}
+--- !u!1 &36180422 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1813383139438198, guid: b9bb76abe744d9947b7b04112abd0792,
+    type: 2}
+  m_PrefabInternal: {fileID: 636029113}
 --- !u!1 &496262874
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +540,21 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114163465884299334, guid: b9bb76abe744d9947b7b04112abd0792,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114163465884299334, guid: b9bb76abe744d9947b7b04112abd0792,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114163465884299334, guid: b9bb76abe744d9947b7b04112abd0792,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9bb76abe744d9947b7b04112abd0792, type: 2}
   m_IsPrefabParent: 0
@@ -640,6 +665,11 @@ Transform:
   m_Father: {fileID: 1664416111}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1019240864 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1823228333994752, guid: b9bb76abe744d9947b7b04112abd0792,
+    type: 2}
+  m_PrefabInternal: {fileID: 636029113}
 --- !u!1 &1028866290 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1760134114181986, guid: 79144d40939439549a07fc7ebaaffe50,
@@ -736,6 +766,26 @@ Prefab:
       propertyPath: healthBar.Array.data[3]
       value: 
       objectReference: {fileID: 1344847807}
+    - target: {fileID: 114365009338417672, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: scorePoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 36180422}
+    - target: {fileID: 114365009338417672, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: scorePoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 1019240864}
+    - target: {fileID: 114365009338417672, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: scorePoint.Array.data[2]
+      value: 
+      objectReference: {fileID: 2117656817}
+    - target: {fileID: 114365009338417672, guid: e1214e15fa58c534aab5768adf7911ea,
+        type: 2}
+      propertyPath: scorePoint.Array.data[3]
+      value: 
+      objectReference: {fileID: 26159733}
     - target: {fileID: 114365009338417672, guid: e1214e15fa58c534aab5768adf7911ea,
         type: 2}
       propertyPath: countdown
@@ -946,3 +996,8 @@ Transform:
   m_Father: {fileID: 1664416111}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2117656817 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1440387605771078, guid: b9bb76abe744d9947b7b04112abd0792,
+    type: 2}
+  m_PrefabInternal: {fileID: 636029113}
