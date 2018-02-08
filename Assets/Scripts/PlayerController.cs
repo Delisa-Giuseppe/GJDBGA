@@ -224,15 +224,26 @@ public class PlayerController : NetworkBehaviour
     {
         if (other.gameObject.tag == "Magma" && !this.isDead && this.Health > 0)
         {
-            print("MAGMA");
-            this.GetComponent<CapsuleCollider>().enabled = false;
-            this.Health = 0;
-            this.isDead = true;
-            this.audio.PlayOneShot(soundsPlayer[1], 1);
-            this.CmdAnimate("Death", false, true);
-            this.PlayerPointDisable();
-            gm.matchDeathCounter++;
-            gm.checkVictory();
+            CmdMagma();
         }
+    }
+
+    [Command]
+    private void CmdMagma()
+    {
+        RpcMagma();
+    }
+
+    [ClientRpc]
+    private void RpcMagma()
+    {
+        print("MAGMA");
+        this.Health = 0;
+        this.isDead = true;
+        this.audio.PlayOneShot(soundsPlayer[1], 1);
+        this.CmdAnimate("Death", false, true);
+        this.PlayerPointDisable();
+        gm.matchDeathCounter++;
+        gm.checkVictory();
     }
 }
