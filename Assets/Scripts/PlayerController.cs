@@ -13,7 +13,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public int DamageOutput;
     [SyncVar] public int Defence;
     [SyncVar] public float PlayerSpeed;
-    [SyncVar(hook = "OnDefence")] public bool isDefending;
+    [SyncVar] public bool isDefending;
     [SyncVar] public bool isAttacking;
     [SyncVar] public bool isArmed;
     [SyncVar] public int gamePoints = 0;
@@ -68,6 +68,8 @@ public class PlayerController : NetworkBehaviour
                 PlayerMovement();
             }
         }
+
+        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) gm.playerList[playerID - 1].Health / (float) gm.playerList[playerID - 1].maxHealth;
     }
 
     [Client]
@@ -101,15 +103,17 @@ public class PlayerController : NetworkBehaviour
     }
 
     [Command]
-    public void CmdUpdateServer(bool defence)
+    public void CmdUpdateServer(bool fight, bool defence, int health)
     {
-        RpcUpdateServer(defence);
+        RpcUpdateServer(fight, defence, health);
     }
 
     [ClientRpc]
-    private void RpcUpdateServer(bool defence)
+    private void RpcUpdateServer(bool fight, bool defence, int health)
     {
+        isAttacking = fight;
         isDefending = defence;
+        Health = health;
     }
 
     void PlayerMovement ()
@@ -163,19 +167,20 @@ public class PlayerController : NetworkBehaviour
 
         }
 
+        OnDefence();
+
         CmdAnimate("StartGame", false, true);
 
         CmdAnimate("IsAttacking", isAttacking, false);
         CmdAnimate("IsDefending", isDefending, false);
 
-        CmdUpdateServer(isDefending);
-        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) gm.playerList[playerID - 1].Health / (float) gm.playerList[playerID - 1].maxHealth;
+        //CmdUpdateServer(isAttacking, isDefending, Health);
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
-    public void OnDefence(bool defence)
+    public void OnDefence()
     {
-        if (defence)
+        if (isDefending)
         {
             shield.SetActive(true);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -220,7 +225,13 @@ public class PlayerController : NetworkBehaviour
     {
         if (other.gameObject.tag == "Magma")
         {
-            TakeDamage(this.gameObject.GetComponent<PlayerController>(), 100);
+            this.Health = 0;
+            this.isDead = true;
+            this.audio.PlayOneShot(soundsPlayer[1], 1);
+            this.CmdAnimate("Death", false, true);
+            this.PlayerPointDisable();
+            gm.matchDeathCounter++;
+            gm.checkVictory();
         }
     }
 }
