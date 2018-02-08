@@ -221,14 +221,13 @@ public class PlayerController : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Magma")
+        if (other.gameObject.tag == "Magma" && !this.isDead && this.Health > 0)
         {
-            int id = playerID - 1;
-            gm.playerList[id].Health = 0;
-            gm.playerList[id].isDead = true;
-            gm.playerList[id].audio.PlayOneShot(soundsPlayer[1], 1);
-            gm.playerList[id].CmdAnimate("Death", false, true);
-            gm.playerList[id].PlayerPointDisable();
+            this.Health = 0;
+            this.isDead = true;
+            this.audio.PlayOneShot(soundsPlayer[1], 1);
+            this.CmdAnimate("Death", false, true);
+            this.PlayerPointDisable();
             gm.matchDeathCounter++;
             gm.checkVictory();
         }

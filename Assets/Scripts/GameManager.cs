@@ -87,8 +87,6 @@ public class GameManager : MonoBehaviour
                 {
                     player.gamePoints += 1;
 
-                    print("POINTS " + player.gamePoints);
-
                     for (int i = 0; i < player.gamePoints; i++)
                     {
                         scorePoint[player.playerID - 1].transform.GetChild(i).GetComponent<Image>().color = new Color(0, 255, 0);
@@ -102,10 +100,18 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
-                player.GetComponent<Animator>().SetTrigger("Respawn");
+                player.CmdAnimate("Respawn", false, true);
                 player.transform.position = spawnPoints[player.playerID - 1].transform.position;
                 player.maxHealth = 10;
-                player.Health = 10;
+                if (player.weapon)
+                {
+                    player.maxHealth = player.weapon.Defence * player.maxHealth; 
+                    player.Health = player.maxHealth;
+                }
+                else
+                {
+                    player.Health = 10;
+                }
                 player.isDead = false;
             }
             
