@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         startGame = false;
+        //maxPlayer = GameObject.Find(Ne)
     }
 
     public List<PlayerController> PlayerList

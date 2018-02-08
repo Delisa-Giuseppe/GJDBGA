@@ -12,27 +12,15 @@ public class MyIp : NetworkBehaviour {
     [Header("Per ottenere IP entrare in playmode")]
     public string myIP;
 
-   public Text IPText;
-	// Use this for initialization
-	void Start () {
-     //IPText = transform.Find("Text").GetComponent<Text>();
-     //   myIP = "";
-     //   if(IPText)
-     //       IPText.text = myIP;
+    public Text IPText;
 
+    void Start ()
+    {
+        IPText = GameObject.Find("Canvas").transform.Find("Text").GetComponent<Text>();
+        myIP = LocalIPAddress();
+        IPText.text = "  IP: " + LocalIPAddress();          
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-
-        //myIP = LocalIPAddress();
-        
-
-        //    IPText.text ="You are the host, this is your IP "+ System.Environment.NewLine + LocalIPAddress();          
-       
-    }
-    
     public string LocalIPAddress()
     {
         IPHostEntry host;
