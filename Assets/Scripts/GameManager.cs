@@ -104,13 +104,8 @@ public class GameManager : MonoBehaviour
 
                 player.GetComponent<Animator>().SetTrigger("Respawn");
                 player.transform.position = spawnPoints[player.playerID - 1].transform.position;
+                player.maxHealth = 10;
                 player.Health = 10;
-                if(player.weapon)
-                {
-                    player.weapon.gameObject.transform.position = player.weapon.oldPosition;
-                    player.weapon.player = null;
-                    player.weapon = null;
-                }
                 player.isDead = false;
             }
             
