@@ -2450,7 +2450,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2714,6 +2714,7 @@ MonoBehaviour:
   isDefending: 0
   isAttacking: 0
   isArmed: 0
+  gamePoints: 0
   maxHealth: 0
   labelPlayer: {fileID: 114989746740070594}
   playerPoint: {fileID: 1939303074462544}
