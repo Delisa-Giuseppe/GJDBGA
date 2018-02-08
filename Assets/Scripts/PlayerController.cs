@@ -20,8 +20,8 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public int maxHealth;
     public Text labelPlayer;
     public GameObject playerPoint;
-    [SyncVar] public Transform weaponPosition;
-    [SyncVar] public GameObject shield;
+    public Transform weaponPosition;
+    public GameObject shield;
     public GameObject helmet;
     [HideInInspector]
     public Animator anim;
@@ -171,7 +171,7 @@ public class PlayerController : NetworkBehaviour
         CmdAnimate("IsDefending", isDefending, false);
 
         //CmdUpdateServer(isAttacking, isDefending, Health);
-        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) Health / (float) maxHealth;
+        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) gm.playerList[playerID - 1].Health / (float) gm.playerList[playerID - 1].maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
@@ -211,7 +211,7 @@ public class PlayerController : NetworkBehaviour
             gm.playerList[id].Health = 0;
             //gm.playerList[id].anim.SetTrigger("Death");
             gm.playerList[id].audio.PlayOneShot(soundsPlayer[1], 1);
-            gm.playerList[id].CmdAnimate("Death", false, false);
+            gm.playerList[id].CmdAnimate("Death", false, true);
             gm.playerList[id].PlayerPointDisable();
             gm.matchDeathCounter++;
             gm.checkVictory();
