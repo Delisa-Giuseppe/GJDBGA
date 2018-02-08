@@ -13,7 +13,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public int DamageOutput;
     [SyncVar] public int Defence;
     [SyncVar] public float PlayerSpeed;
-    [SyncVar] public bool isDefending;
+    [SyncVar(hook = "OnDefence")] public bool isDefending;
     [SyncVar] public bool isAttacking;
     [SyncVar] public bool isArmed;
     [SyncVar] public int gamePoints = 0;
@@ -101,17 +101,15 @@ public class PlayerController : NetworkBehaviour
     }
 
     [Command]
-    public void CmdUpdateServer(bool fight, bool defence, int health)
+    public void CmdUpdateServer(bool defence)
     {
-        RpcUpdateServer(fight, defence, health);
+        RpcUpdateServer(defence);
     }
 
     [ClientRpc]
-    private void RpcUpdateServer(bool fight, bool defence, int health)
+    private void RpcUpdateServer(bool defence)
     {
-        isAttacking = fight;
         isDefending = defence;
-        Health = health;
     }
 
     void PlayerMovement ()
@@ -165,21 +163,19 @@ public class PlayerController : NetworkBehaviour
 
         }
 
-        OnDefence();
-
         CmdAnimate("StartGame", false, true);
 
         CmdAnimate("IsAttacking", isAttacking, false);
         CmdAnimate("IsDefending", isDefending, false);
 
-        //CmdUpdateServer(isAttacking, isDefending, Health);
+        CmdUpdateServer(isDefending);
         gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) gm.playerList[playerID - 1].Health / (float) gm.playerList[playerID - 1].maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
-    public void OnDefence()
+    public void OnDefence(bool defence)
     {
-        if (isDefending)
+        if (defence)
         {
             shield.SetActive(true);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
