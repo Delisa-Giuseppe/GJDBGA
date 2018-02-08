@@ -223,11 +223,12 @@ public class PlayerController : NetworkBehaviour
     {
         if (other.gameObject.tag == "Magma")
         {
-            this.Health = 0;
-            this.isDead = true;
-            this.audio.PlayOneShot(soundsPlayer[1], 1);
-            this.CmdAnimate("Death", false, true);
-            this.PlayerPointDisable();
+            int id = playerID - 1;
+            gm.playerList[id].Health = 0;
+            gm.playerList[id].isDead = true;
+            gm.playerList[id].audio.PlayOneShot(soundsPlayer[1], 1);
+            gm.playerList[id].CmdAnimate("Death", false, true);
+            gm.playerList[id].PlayerPointDisable();
             gm.matchDeathCounter++;
             gm.checkVictory();
         }
