@@ -100,24 +100,27 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
+                player.isDead = false;
                 player.CmdAnimate("Respawn", false, true);
                 player.transform.position = spawnPoints[player.playerID - 1].transform.position;
                 player.maxHealth = 10;
+                playerList[player.playerID-1].maxHealth = 10;
                 if (player.weapon)
                 {
-                    player.maxHealth = player.weapon.Defence * player.maxHealth; 
-                    player.Health = player.maxHealth;
+                    player.maxHealth = player.weapon.Defence * player.maxHealth;
+                    playerList[player.playerID - 1].maxHealth = player.weapon.Defence * playerList[player.playerID - 1].maxHealth;
+                    playerList[player.playerID - 1].Health = playerList[player.playerID - 1].maxHealth;
                 }
                 else
                 {
                     player.Health = 10;
+                    playerList[player.playerID - 1].Health = 10;
                 }
-                player.isDead = false;
             }
 
             matchDeathCounter = 0;
-            startGame = false;
-            StartCoroutine(WaitToLoad());
+            //startGame = false;
+            //StartCoroutine(WaitToLoad());
         }
     }
 
