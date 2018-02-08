@@ -68,8 +68,6 @@ public class PlayerController : NetworkBehaviour
                 PlayerMovement();
             }
         }
-
-        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float) gm.playerList[playerID - 1].Health / (float) gm.playerList[playerID - 1].maxHealth;
     }
 
     [Client]
@@ -175,6 +173,7 @@ public class PlayerController : NetworkBehaviour
         CmdAnimate("IsDefending", isDefending, false);
 
         //CmdUpdateServer(isAttacking, isDefending, Health);
+        gm.healthBar[playerID - 1].GetComponent<Image>().fillAmount = (float)gm.playerList[playerID - 1].Health / (float)gm.playerList[playerID - 1].maxHealth;
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
