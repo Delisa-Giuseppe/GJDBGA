@@ -160,8 +160,8 @@ public class PlayerController : NetworkBehaviour
 
             //anim.SetTrigger("StartGame");
 
-            //anim.SetBool("IsAttacking", isAttacking);
-            //anim.SetBool("IsDefending", isDefending);
+            anim.SetBool("IsAttacking", isAttacking);
+            anim.SetBool("IsDefending", isDefending);
 
         }
 
