@@ -16,6 +16,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar(hook = "OnDefence")] public bool isDefending;
     [SyncVar] public bool isAttacking;
     [SyncVar] public bool isArmed;
+    [SyncVar] public int gamePoints = 0;
     public int maxHealth;
     public Text labelPlayer;
     public GameObject playerPoint;
@@ -203,14 +204,16 @@ public class PlayerController : NetworkBehaviour
         gm.playerList[id].Health -= damage;
         gm.playerList[id].anim.SetTrigger("TakeDamage");
 
-        if (gm.playerList[id].Health <= 0)
+        if (gm.playerList[id].Health <= 0 && !gm.playerList[id].isDead)
         {
-            gm.playerList[id].Health = 0;
             gm.playerList[id].isDead = true;
+            gm.playerList[id].Health = 0;
             gm.playerList[id].anim.SetTrigger("Death");
             gm.playerList[id].audio.PlayOneShot(soundsPlayer[1], 1);
             gm.playerList[id].CmdAnimate("Death", false, false);
             gm.playerList[id].PlayerPointDisable();
+            gm.matchDeathCounter++;
+            gm.checkVictory();
         }
     }
 }

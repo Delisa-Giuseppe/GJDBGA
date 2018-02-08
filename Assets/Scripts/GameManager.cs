@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public Animator countdown;
     private bool isInitialized = false;
 
+    public int matchDeathCounter = 0;
+
     private void Start()
     {
         startGame = false;
@@ -63,59 +65,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    //int contatore morti
-    public int DeathCounter;
-    //when player muore contatore++
-    void checkmorte()
+    public void checkVictory()
     {
-        foreach (var player in playerList)
+        if (matchDeathCounter == 3)
         {
-            if (player.isDead == true)
-            {
-                DeathCounter++;
-            }
-        }
-
-    }
-
-
-
-    void checkVictory()
-    {  //when contatore 3   
-        if (DeathCounter == 3)
-        {   //check vittoria(controllare player vivo) sommare 1pt al player vivo, check pt player if 3 Vittoria
             foreach (var player in playerList)
             {
                 if (player.isDead == false)
                 {
+                    player.gamePoints += 1;
 
+                    if (player.gamePoints >= 3)
+                    {
+                        playerWins(player.playerID);
+                    }
                 }
-            }
-            //altrimenti
-            //contatore 0
-            DeathCounter = 0;
-        }
-        else
-        {
-            playerRespawn();
-        }
 
+                player.Health = 10;
+                player.isDead = false;
+                player.transform.position = spawnPoints[player.playerID - 1].transform.position;
+            }
+
+            matchDeathCounter = 0;
+        }
     }
 
-    void playerRespawn()
+    public void playerWins(int playerID)
     {
-        //respawn player totale (10vit)
-        //bool death false;
-        //allocate to spawnpoint;
-
-        for (int i = 0; i < playerList.Count - 1; i++)
-        {
-            playerList[i].Health = 10;
-            playerList[i].isDead = true;
-            playerList[i].transform.position = spawnPoints[i].transform.position;
-        }
-
+        SceneManager.LoadScene("Assets/Scene/Menu/Vittoria.unity");
     }
 }
   
