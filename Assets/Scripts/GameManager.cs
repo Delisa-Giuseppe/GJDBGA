@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
             matchDeathCounter = 0;
             startGame = false;
             countdown.gameObject.SetActive(true);
+            countdown.Play("Cooldown", -1, 0f);
         }
     }
 
