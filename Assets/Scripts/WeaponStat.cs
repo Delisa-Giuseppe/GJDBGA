@@ -10,8 +10,12 @@ public class WeaponStat : MonoBehaviour {
     public float PlayerSpeed;
     public PlayerController player;
 
+    [HideInInspector]
+    public Vector3 oldPosition;
+
     void Start () {
         player = null;
+        oldPosition = transform.position;
 	}
 
     private void OnTriggerEnter(Collider other)
