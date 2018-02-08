@@ -40,7 +40,7 @@ public class PlayerController : NetworkBehaviour
     private Vector3 cursorPosition;
     private Vector3 playerDirection;
     private GameManager gm;
-    public bool isDead;
+    [SyncVar] public bool isDead;
     
     void Start()
     {
