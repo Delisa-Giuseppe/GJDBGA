@@ -13,7 +13,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public int DamageOutput;
     [SyncVar] public int Defence;
     [SyncVar] public float PlayerSpeed;
-    [SyncVar(hook = "OnDefence")] public bool isDefending;
+    [SyncVar] public bool isDefending;
     [SyncVar] public bool isAttacking;
     [SyncVar] public bool isArmed;
     [SyncVar] public int gamePoints = 0;
@@ -165,6 +165,8 @@ public class PlayerController : NetworkBehaviour
 
         }
 
+        OnDefence();
+
         CmdAnimate("StartGame", false, true);
 
         CmdAnimate("IsAttacking", isAttacking, false);
@@ -175,9 +177,9 @@ public class PlayerController : NetworkBehaviour
         labelPlayer.transform.rotation = Quaternion.LookRotation(labelPlayer.transform.position - Camera.main.transform.position);
     }
 
-    public void OnDefence(bool defence)
+    public void OnDefence()
     {
-        if (defence)
+        if (isDefending)
         {
             shield.SetActive(true);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
