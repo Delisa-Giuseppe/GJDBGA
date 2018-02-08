@@ -114,12 +114,18 @@ public class GameManager : MonoBehaviour
                 }
                 player.isDead = false;
             }
-            
+
             matchDeathCounter = 0;
             startGame = false;
-            countdown.gameObject.SetActive(true);
-            countdown.SetTrigger("Start");
+            StartCoroutine(WaitToLoad());
         }
+    }
+
+    private IEnumerator WaitToLoad()
+    {
+        yield return new WaitForSeconds(3);
+        countdown.gameObject.SetActive(true);
+        countdown.SetTrigger("Start");
     }
 
     public void playerWins()
