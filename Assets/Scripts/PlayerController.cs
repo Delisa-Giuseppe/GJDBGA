@@ -233,6 +233,7 @@ public class PlayerController : NetworkBehaviour
             this.PlayerPointDisable();
             gm.matchDeathCounter++;
             gm.checkVictory();
+            CmdUpdateServer(isDefending, gamePoints);
         }
     }
 
