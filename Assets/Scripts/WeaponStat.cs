@@ -25,54 +25,30 @@ public class WeaponStat : MonoBehaviour {
     {
         PlayerController pc = other.GetComponent<PlayerController>();
 
-        if (pc && !player)
+        if (pc && !pc.isArmed && !player)
         {
             pc.DamageOutput = DamageOutput;
             pc.Defence = Defence;
             pc.PlayerSpeed = PlayerSpeed;
+            pc.maxHealth = Defence * pc.maxHealth;
+            pc.Health = pc.maxHealth;
             player = pc;
             transform.parent = pc.weaponPosition;
             transform.position = pc.weaponPosition.position;
             pc.isArmed = true;
             pc.weapon = this;
-            GetComponent<SphereCollider>().enabled = false;
+            GetComponent<MeshCollider>().enabled = false;
         }
-        else if (pc && pc.playerID != player.playerID && !pc.isDefending)
+        else if (pc && pc != player && !pc.isDefending)
         {
+<<<<<<< HEAD
             Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
             pc.anim.SetTrigger("TakeDamage");
             pc.Health -= player.DamageOutput;
             pc.labelPlayer.text = " HEALTH : " + pc.Health;
+=======
+            pc.TakeDamage(pc, player.DamageOutput);
+>>>>>>> f3fec542f616d94f1e47f04e81c8c44df1e7f016
         }
     }
-
-    //void ManageWeapon(Collider other)
-    //{
-    //    PlayerController pc = other.GetComponent<PlayerController>();
-    //    if (player)
-    //        Debug.Log(player.isAttacking);
-
-    //    if (pc)
-    //    {
-    //        if (!player)
-    //        {
-    //            pc.DamageOutput = DamageOutput;
-    //            pc.Defence = Defence;
-    //            pc.PlayerSpeed = PlayerSpeed;
-    //            player = pc;
-    //            transform.parent = pc.weaponPosition;
-    //            transform.position = pc.weaponPosition.position;
-    //            pc.isArmed = true;
-    //        }
-    //        else if (pc.playerID != player.playerID && player.isAttacking)
-    //        {
-    //            if (other.gameObject.GetComponent<PlayerStat>() != null)
-    //            {
-    //                Debug.Log("Il guerriero " + player.playerID + " Ha colpito il guerriero" + pc.playerID);
-    //                pc.Health -= player.DamageOutput;
-    //                pc.labelPlayer.text = " HEALTH : " + pc.Health;
-    //            }
-    //        }
-    //    }
-    //}
 }

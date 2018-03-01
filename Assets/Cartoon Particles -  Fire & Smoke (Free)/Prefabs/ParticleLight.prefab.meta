@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Cartoon Particles -  Fire & Smoke (Free)/Prefabs/ParticleLight.prefab.meta
 guid: 40fdcf5dab666874588e5b54c5d70f5d
 timeCreated: 1518006023
+=======
+guid: 38cb59b3ef205044abc23b42329d3cab
+timeCreated: 1518036394
+>>>>>>> f3fec542f616d94f1e47f04e81c8c44df1e7f016:Assets/Prefabs/Arena_Zero.prefab.meta
 licenseType: Free
 NativeFormatImporter:
   mainObjectFileID: 100100000

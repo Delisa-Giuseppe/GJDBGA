@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Cartoon Particles -  Fire & Smoke (Free)/Prefabs/Fire_Long_01 1.prefab.meta
 guid: 4b6e3d21fe7720341a3a70c0b7db6807
 timeCreated: 1518012823
+=======
+guid: fd68445fa10e83a408f03b9d2fe70229
+timeCreated: 1518013770
+>>>>>>> f3fec542f616d94f1e47f04e81c8c44df1e7f016:Assets/Prefabs/Arena_Hero2.prefab.meta
 licenseType: Free
 NativeFormatImporter:
   mainObjectFileID: 100100000

@@ -5,38 +5,25 @@ using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MyIp : NetworkBehaviour {
     [Header("Per ottenere IP entrare in playmode")]
     public string myIP;
 
-   public Text IPText;
-	// Use this for initialization
-	void Start () {
-      //  IPText = transform.Find("Text").GetComponent<Text>();
-        myIP = "";
-        if(IPText)
-            IPText.text = myIP;
+    public Text IPText;
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
-
-
-        myIP = LocalIPAddress();
-        if (NetworkManager.singleton.networkAddress == "localhost" && IPText)
-        {
-            IPText.gameObject.SetActive(true);
-            IPText.text ="You are the host, this is your IP "+ System.Environment.NewLine + LocalIPAddress();          
-        }
-    }
-    
-    public void StartHASHost()
+    void Start ()
     {
+<<<<<<< HEAD
 
         GetComponent<NetworkManager>().StartHost();
+=======
+        IPText = GameObject.Find("Canvas").transform.Find("Text").GetComponent<Text>();
+        myIP = LocalIPAddress();
+        IPText.text = "  IP: " + LocalIPAddress();          
+>>>>>>> f3fec542f616d94f1e47f04e81c8c44df1e7f016
     }
 
     public string LocalIPAddress()

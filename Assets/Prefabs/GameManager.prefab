@@ -18,8 +18,13 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 4949199511524626}
   - component: {fileID: 114295362885681882}
+=======
+  - component: {fileID: 4241110229396288}
+  - component: {fileID: 114365009338417672}
+>>>>>>> f3fec542f616d94f1e47f04e81c8c44df1e7f016
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,7 +45,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &114295362885681882
+=======
+--- !u!114 &114365009338417672
+>>>>>>> f3fec542f616d94f1e47f04e81c8c44df1e7f016
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -51,9 +60,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7b8cf7bf636c24f874c98834f5c82c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   maxPlayer: 1
+=======
+  maxPlayer: 4
+>>>>>>> f3fec542f616d94f1e47f04e81c8c44df1e7f016
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  playerList: []
+  healthBar:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  scorePoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerMat:
+  - {fileID: 2100000, guid: ccd320264d61503409d7430a5862630a, type: 2}
+  - {fileID: 2100000, guid: 13bad2e7bc6c85c4d9557dab6802a6be, type: 2}
+  - {fileID: 2100000, guid: e7b785d700e09d543a8218928090f3c8, type: 2}
+  - {fileID: 2100000, guid: d0c7f9966375b3d4cb271d364f529a79, type: 2}
+  countdown: {fileID: 0}
+  waitingText: {fileID: 0}
+  matchDeathCounter: 0
